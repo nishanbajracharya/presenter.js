@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>presenter.js</title>
 
+  <!-- Font Awesome embed code -->
+  <script src="https://use.fontawesome.com/2e212a9824.js"></script>
+
+  <!-- Roboto Font -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/style.css">
@@ -14,6 +20,22 @@
   <![endif]-->
 </head>
 <body>
-
+  <div class="header">
+    <button class="header-play-btn"><i class="fa fa-play" aria-hidden="true"></i> Play</button>
+  </div>
+  <div class="main-container clear-fix">
+    <div class="slides-list"></div>
+    <div class="slides-editor">
+      <div class="slide-body">
+      </div>
+      <div class="slide-notes">
+        <textarea placeholder="Fill notes for this slide"></textarea>
+      </div>
+    </div>
+  </div>
+  <script src="js/Utils.js"></script>
+  <script src="js/Slide.js"></script>
+  <script src="js/UI.js"></script>
+  <script src="js/Presenter.js"></script>
 </body>
 </html>
