@@ -56,7 +56,7 @@ var UI = (function() {
       if (slideArray[i].index === index) {
         slideArray[i].element.style.display = "block";
         slideArray[i].iconElement.className = "slide-list-icon active";
-        that.slideNotes.getElementsByTagName("textarea")[0].innerText = slideArray[i].notes;
+        that.slideNotes.getElementsByTagName("textarea")[0].innerHTML = slideArray[i].notes;
       } else {
         slideArray[i].element.style.display = "none";
         slideArray[i].iconElement.className = "slide-list-icon";

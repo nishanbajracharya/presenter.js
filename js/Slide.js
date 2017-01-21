@@ -33,14 +33,14 @@ var Slide = function(index) {
     },
     img : {
       attributes : {
-        src : "http://placehold.it/" + Utils.getRandomNumber(100, 300) + "x" + Utils.getRandomNumber(100, 300)
+        src : "http://www.orderwise.co.uk/wp-content/uploads/2011/02/stock-control-software1-439x3241.jpg"
       },
       position : {
-        x : Utils.getRandomNumber(20, 400),
-        y : Utils.getRandomNumber(20, 400)
+        x : Utils.getRandomNumber(100, 400),
+        y : Utils.getRandomNumber(100, 200)
       }
     }
   };
-  
+
   this.notes = "Welp, this is a note : " + (this.index + 1);
 };
