@@ -5,6 +5,19 @@
 
 /* Header */
 .header {
+  text-align: center;
+}
+
+.header .header-logo {
+  text-decoration: none;
+  color: #a22;
+  float: left;
+}
+
+.header .header-logo h1 {
+  font-family: 'Comfortaa', cursive;
+  font-size: 30px;
+  font-weight: 300;
 }
 
 .header .header-play-btn {
@@ -15,6 +28,17 @@
   border-radius: 2px;
   width: 100px;
   outline: none;
+  box-shadow: 0 2px #47a;
+}
+
+.header .header-play-btn:hover {
+  background: #48b;
+}
+
+.header .header-play-btn:active {
+  margin-top: 1px;
+  background: #48b;
+  box-shadow: 0 1px #47a;
 }
 
 /* Main Container */
