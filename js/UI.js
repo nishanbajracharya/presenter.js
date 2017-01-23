@@ -14,12 +14,15 @@ var UI = (function() {
 
   this.slides = [];
 
+  //Builder Mode
   var createSlide = function(slide) {
     var slideElement = document.createElement("div");
     slideElement.setAttribute("class", "slide");
     slide.element = slideElement;
     for (var elem in slide.content) {
-      var e = document.createElement(elem);
+      var e = document.createElement(slide.content[elem].tag);
+      slide.content[elem].tagObj.element = e;
+      slide.content[elem].tagObj.initMove(slideElement);
       if (slide.content[elem].value) {
         e.innerText = slide.content[elem].value;
       };
@@ -56,7 +59,7 @@ var UI = (function() {
       if (slideArray[i].index === index) {
         slideArray[i].element.style.display = "block";
         slideArray[i].iconElement.className = "slide-list-icon active";
-        that.slideNotes.getElementsByTagName("textarea")[0].innerHTML = slideArray[i].notes;
+        that.slideNotes.getElementsByTagName("textarea")[0].value = slideArray[i].notes;
       } else {
         slideArray[i].element.style.display = "none";
         slideArray[i].iconElement.className = "slide-list-icon";
@@ -64,6 +67,7 @@ var UI = (function() {
     };
   };
 
+  // Presentation Mode
   var startPresentation = function(slidesArray) {
 
     var fullscreenScale = window.screen.width / Utils.getStyle(document.getElementsByClassName("slide")[0], "width");
@@ -76,6 +80,8 @@ var UI = (function() {
     };
 
     presentationElement.innerHTML = "";
+
+    presentationElement.setAttribute("oncontextmenu", "return false;");
 
     presentationContainer = document.createElement("div");
     presentationContainer.setAttribute("class", "presentation-container");
