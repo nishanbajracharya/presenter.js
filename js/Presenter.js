@@ -20,13 +20,27 @@
     UI.startPresentation(slidesArray);
   }
 
+  document.getElementsByClassName("header-new-slide-btn")[0].onclick = function() {
+    var slide = new Slide(slidesArray.length);
+    slidesArray.push(slide);
+    UI.createSlide(slide);
+
+    slide.iconElement.onclick = (function(i) {
+      return function() {
+        UI.viewSlide(slidesArray, i);
+      }
+    })(slidesArray.length - 1);
+
+    UI.viewSlide(slidesArray, slidesArray.length - 1);
+  }
+
   document.addEventListener("keyup", function(e) {
     /**
      * KeyCodes :
      * 37 = Left Arrow, 39 = Right Arrow, 32 = Space, 13 = Enter, 27 = Escape
      */
 
-    if (presentationMode) {
+     if (presentationMode) {
       if (e.keyCode === 37) {
         index--;
         if (index < 0) {
@@ -46,6 +60,14 @@
         UI.startPresentation(slidesArray);
       };*/
       //UI.viewSlide(slidesArray, index);
+      //
+      
+    };
+  });
+
+  document.addEventListener("mouseup", function(e) {
+    for(var slide in slidesArray) {
+      slidesArray[slide].updateElements();
     };
   });
 
