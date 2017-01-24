@@ -26,23 +26,43 @@
   <![endif]-->
 </head>
 <body>
-  <div class="header">
-    <a href="https://nishan13.github.io/presenter.js/" class="header-logo"><h1>presenter.js</h1></a>
-    <button class="header-new-slide-btn"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> New Slide</button>
-    <button class="header-play-btn"><i class="fa fa-play" aria-hidden="true"></i> Play</button>
+  <div class="header clear-fix">
+    <div class="header-left clear-fix">
+      <a href="https://nishan13.github.io/presenter.js/" class="header-logo"><h1>presenter.js</h1></a>
+      <div class="header-toolbar clear-fix">
+        <ul>
+          <li title="Bold" class="text-bold header-toolbar-icon"><i class="fa fa-bold"></i></li>
+          <li title="Italic" class="text-italic header-toolbar-icon"><i class="fa fa-italic"></i></li>
+          <li title="Underline" class="text-underline header-toolbar-icon"><i class="fa fa-underline"></i></li>
+        </ul>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="header-new-slide-btn"><i class="fa fa-file-text-o" aria-hidden="true"></i> New Slide</button>
+      <button class="header-play-btn"><i class="fa fa-play" aria-hidden="true"></i> Play</button>
+    </div>
   </div>
   <div class="main-container clear-fix">
     <div class="slides-list"></div>
     <div class="slides-editor">
-      <div class="slide-body">
+      <div class="slide-body" oncontextmenu="return false;">
       </div>
       <div class="slide-notes">
         <textarea placeholder="Fill notes for this slide"></textarea>
       </div>
     </div>
   </div>
+
+  <div class="toolbar">
+    <ul>
+      <li title="Text" class="toolbar-text"><i class="fa fa-font" aria-hidden="true"></i></li>
+      <li title="Image" class="toolbar-image"><i class="fa fa-picture-o" aria-hidden="true"></i></li>
+      <li title="Shape" class="toolbar-shape"><i class="fa fa-plus-circle" aria-hidden="true"></i></li>
+    </ul>
+  </div>
   <script src="js/Utils.js"></script>
   <script src="js/Tag.js"></script>
+  <script src="js/Toolbar.js"></script>
   <script src="js/Slide.js"></script>
   <script src="js/UI.js"></script>
   <script src="js/Presenter.js"></script>

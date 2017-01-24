@@ -4,6 +4,10 @@ var UI = (function() {
   var presentationElement = null;
   var presentationContainer = null;
 
+  var currentSlideIndex = 0;
+
+  this.selectedElement;
+
   this.container = document.getElementsByClassName("main-container")[0];
   this.slidesList = this.container.getElementsByClassName("slides-list")[0];
   this.slideBody = this.container.getElementsByClassName("slide-body")[0];
@@ -37,6 +41,8 @@ var UI = (function() {
 
       e.style.top = slide.content[elem].position.y + "px";
       e.style.left = slide.content[elem].position.x + "px";
+
+
       slideElement.appendChild(e);
     };
 
@@ -54,18 +60,58 @@ var UI = (function() {
 
   };
 
+  var updateSlide = function(slidesArray, index) {
+    var slide = slidesArray[index];
+    var slideElement = slide.element;
+    slideElement.innerHTML = "";
+    for (var elem in slide.content) {
+      var e = document.createElement(slide.content[elem].tag);
+      slide.content[elem].tagObj.element = e;
+      slide.content[elem].tagObj.initMove(slideElement);
+      if (slide.content[elem].value) {
+        e.innerText = slide.content[elem].value;
+      };
+
+      for (var attribute in slide.content[elem].attributes) {
+        e.setAttribute(attribute, slide.content[elem].attributes[attribute]);
+      };
+
+      for (var style in slide.content[elem].styles) {
+        e.style[style] = slide.content[elem].styles[style];
+      };
+
+      e.style.top = slide.content[elem].position.y + "px";
+      e.style.left = slide.content[elem].position.x + "px";
+      slideElement.appendChild(e);
+    };
+  }
+
   var viewSlide = function(slideArray, index) {
     for (var i = 0; i < slideArray.length; i++) {
       if (slideArray[i].index === index) {
         slideArray[i].element.style.display = "block";
         slideArray[i].iconElement.className = "slide-list-icon active";
         that.slideNotes.getElementsByTagName("textarea")[0].value = slideArray[i].notes;
+        currentSlideIndex = index;
       } else {
         slideArray[i].element.style.display = "none";
         slideArray[i].iconElement.className = "slide-list-icon";
       };
     };
   };
+
+  var getCurrentSlideIndex = function() {
+    return currentSlideIndex;
+  }
+
+  var getRelativePosition = function(slideArray, e) {
+    var posX = e.clientX - slideArray[currentSlideIndex].element.getBoundingClientRect().left - document.documentElement.scrollLeft;
+    var posY = e.clientY - slideArray[currentSlideIndex].element.getBoundingClientRect().top - document.documentElement.scrollTop;
+    return {
+      posX: posX,
+      posY: posY
+    }
+  }
 
   // Presentation Mode
   var startPresentation = function(slidesArray) {
@@ -128,6 +174,9 @@ var UI = (function() {
   return {
     createSlide: createSlide,
     viewSlide: viewSlide,
+    updateSlide: updateSlide,
+    getCurrentSlideIndex: getCurrentSlideIndex,
+    getRelativePosition: getRelativePosition,
     startPresentation: startPresentation,
     exitPresentation: exitPresentation,
     movePresentationSlide: movePresentationSlide

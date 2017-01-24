@@ -31,6 +31,9 @@ var Tag = function(tag, value, position, attributes, styles) {
   this.attributes = attributes;
 
   this.element = null;
+  this.toolbar = null;
+
+  this.selected = false;
 
   this.index = Utils.generateIndex(8, false);
   this.props = {
@@ -61,6 +64,11 @@ var Tag = function(tag, value, position, attributes, styles) {
     this.attributes[key] = value;
   };
 
+  this.setValue = function(string) {
+    this.value = string;
+    console.log(this.value);
+  }
+
   this.initMove = function(container){
 
     var posX = 0;
@@ -81,7 +89,7 @@ var Tag = function(tag, value, position, attributes, styles) {
           x: that.element.getBoundingClientRect().left - that.element.parentElement.getBoundingClientRect().left,
           y: that.element.getBoundingClientRect().top  - that.element.parentElement.getBoundingClientRect().top
         }
-        console.log(that, that.position);
+        //console.log(that, that.position);
       }
       movingElementFlag = false;
     });
