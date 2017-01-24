@@ -228,8 +228,8 @@
     if(selectedElement) {
       console.log(selectedElement);
       if(selectedElement.element.style.textDecoration === "underline") {
-        selectedElement.element.style.textDecoration = "normal";
-        selectedElement.setStyle("text-decoration", "normal");
+        selectedElement.element.style.textDecoration = "none";
+        selectedElement.setStyle("text-decoration", "none");
         this.classList.remove("active");
       }else {
         selectedElement.element.style.textDecoration = "underline";
@@ -261,6 +261,18 @@
     var slideIndex = UI.getCurrentSlideIndex();
     var pos = UI.getRelativePosition(slidesArray, e);
     slidesArray[slideIndex].addElement(Toolbar.createNewText("New Text", pos.posX, pos.posY));
+    
+    UI.updateSlide(slidesArray, slideIndex);
+  }
+
+  toolbar.getElementsByClassName("toolbar-img-input")[0].onchange = function(e) {
+    console.log(this.files[0]);
+    var path = (window.URL || window.webkitURL).createObjectURL(this.files[0]);
+    console.log(path);
+    //console.log(index, slidesArray[index]);
+    var slideIndex = UI.getCurrentSlideIndex();
+    var pos = UI.getRelativePosition(slidesArray, e);
+    slidesArray[slideIndex].addElement(Toolbar.createNewImage(path, pos.posX, pos.posY));
     
     UI.updateSlide(slidesArray, slideIndex);
   }
