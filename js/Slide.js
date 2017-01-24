@@ -46,6 +46,8 @@ var Slide = function(index) {
   };
   this.content = {};
 
+  /*
+  
   var h1 = new Tag("h1", "This is a h1 tag", {x: 70, y: 120});
   h1.setStyle("color", "#49c");
   this.content[h1.index] = h1.getProps();
@@ -57,18 +59,31 @@ var Slide = function(index) {
   input.setAttribute("placeholder", "Placeholder Here");
   this.content[input.index] = input.getProps();
   this.content[input.index].tagObj = input;
+  
+  */
 
   //console.log(this.content);
 
   this.updateElements = function() {
     for(elem in this.content) {
       var tagObj = this.content[elem].tagObj;
+      if(this.content[tagObj.index].tagObj.element !== null) {
+        //console.log(this.content[tagObj.index].value, this.content[tagObj.index].tagObj.element.textContent);
+        //this.content[tagObj.index].value = this.content[tagObj.index].tagObj.element.innerTextontent;
+        this.content[tagObj.index].tagObj.setValue(this.content[tagObj.index].tagObj.element.innerText);
+      }
       this.content[tagObj.index] = tagObj.getProps();
       this.content[tagObj.index].tagObj = tagObj;
       //this.content[elem] = this.content[elem].tagObj.getProps();
     }
-    console.log(this.content);
   };
+
+  this.addElement = function(tag) {
+    //console.log(tag);
+    this.content[tag.index] = tag.getProps();
+    this.content[tag.index].tagObj = tag;
+    this.updateElements();
+  }
 
   //this.tagsArray = [h1, input];
 
