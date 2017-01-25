@@ -34,6 +34,31 @@
           <li title="Bold" class="text-bold header-toolbar-icon"><i class="fa fa-bold"></i></li>
           <li title="Italic" class="text-italic header-toolbar-icon"><i class="fa fa-italic"></i></li>
           <li title="Underline" class="text-underline header-toolbar-icon"><i class="fa fa-underline"></i></li>
+          <li title="Align Left" class="text-align-left header-toolbar-icon"><i class="fa fa-align-left"></i></li>
+          <li title="Align Center" class="text-align-center header-toolbar-icon"><i class="fa fa-align-center"></i></li>
+          <li title="Align Right" class="text-align-right header-toolbar-icon"><i class="fa fa-align-right"></i></li>
+          <li title="Align Justify" class="text-align-justify header-toolbar-icon"><i class="fa fa-align-justify"></i></li>
+          <li class="text-font header-toolbar-icon"><span class="font-name">Font</span>
+            <ul class="font-list">
+              <li data-name="Arial" class="font-list-name">Arial</li>
+              <li data-name="Comic Sans MS" class="font-list-name">Comic Sans</li>
+              <li data-name="Courier" class="font-list-name">Courier</li>
+              <li data-name="Georgia" class="font-list-name">Georgia</li>
+              <li data-name="Roboto" class="font-list-name">Roboto</li>
+              <li data-name="Times New Roman" class="font-list-name">Times New Roman</li>
+              <li data-name="sans-serif" class="font-list-name barrier">Sans Serif</li>
+              <li data-name="serif" class="font-list-name">Serif</li>
+              <li data-name="monospace" class="font-list-name">monospace</li>
+            </ul>
+          </li>
+          <li title="Font Size" class="text-font-size header-toolbar-icon"><input type="text" value="16"></li>
+          <li title="Color" class="text-color header-toolbar-icon">
+            <i class="fa fa-pencil"></i>
+            <div class="color-picker">
+              <p>Pick a color</p>
+              <ul></ul>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -46,6 +71,8 @@
     <div class="slides-list"></div>
     <div class="slides-editor">
       <div class="slide-body" oncontextmenu="return false;">
+        <div class="resize-anchor"></div>
+        <div class="delete-element"><i class="fa fa-times-circle"></i></div>
       </div>
       <div class="slide-notes">
         <textarea placeholder="Fill notes for this slide"></textarea>
@@ -61,10 +88,10 @@
     </ul>
   </div>
   <script src="js/Utils.js"></script>
+  <script src="js/UI.js"></script>
   <script src="js/Tag.js"></script>
   <script src="js/Toolbar.js"></script>
   <script src="js/Slide.js"></script>
-  <script src="js/UI.js"></script>
   <script src="js/Presenter.js"></script>
 </body>
 </html>

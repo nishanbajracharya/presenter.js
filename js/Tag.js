@@ -66,7 +66,7 @@ var Tag = function(tag, value, position, attributes, styles) {
 
   this.setValue = function(string) {
     this.value = string;
-    console.log(this.value);
+    //console.log(this.value);
   }
 
   this.initMove = function(container){
@@ -104,6 +104,8 @@ var Tag = function(tag, value, position, attributes, styles) {
         document.body.style.cursor = "move";
         that.element.style.left = (e.clientX - parentContainerPosition.x - posX) + "px";
         that.element.style.top = (e.clientY - parentContainerPosition.y - posY) + "px";
+        UI.setResizeAnchorPosition(that.element);
+        UI.setDeleteElementPosition(that.element);
       }
     });
 
