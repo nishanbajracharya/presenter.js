@@ -115,7 +115,7 @@
   border: 1px solid #aaa;
 }
 
-.header-toolbar ul li.text-color .color-picker, .header-toolbar ul li.text-bg-color .color-picker{
+.header-toolbar ul li.text-color .color-picker{
   position: absolute;
   top: 0;
   left: 0;
@@ -128,7 +128,24 @@
   display: none;
 }
 
-.header-toolbar ul li.text-color:hover .color-picker, .header-toolbar ul li.text-bg-color:hover .color-picker {
+.header-toolbar ul li.text-bg-color .color-picker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  background: #fff;
+  width: 222px;
+  z-index: 40;
+  display: none;
+}
+
+.header-toolbar ul li.text-color:hover .color-picker {
+  display: block;
+}
+
+.header-toolbar ul li.text-bg-color:hover .color-picker {
   display: block;
 }
 
