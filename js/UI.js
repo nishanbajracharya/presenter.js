@@ -186,6 +186,7 @@ var UI = (function() {
     }
     textToolbars[8].getElementsByTagName("input")[0].value = Utils.getStyle(elem, "font-size");
     textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color = elem.style.color;
+    textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color = elem.style.background;
   }
 
   var setResizeAnchorPosition = function(elem) {
