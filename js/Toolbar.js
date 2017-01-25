@@ -20,6 +20,7 @@ var Toolbar = (function() {
     var text = new Tag("div", string, {x: posX, y: posY});
     text.setStyle("text-align", "left");
     text.setStyle("font-size", UI.textToolbars[8].getElementsByTagName("input")[0].value + "px");
+    text.setStyle("color", UI.textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color);
     text.setAttribute("contenteditable", true);
     return text;
   }
@@ -33,7 +34,19 @@ var Toolbar = (function() {
     return img;
   }
 
+  var canvas = document.getElementsByClassName("color-bar")[0];
+  var ctx = canvas.getContext('2d');
+
+  var colorBar = new Image();
+  colorBar.src="images/color-picker.png";
+
+  colorBar.onload = function() {
+    ctx.drawImage(colorBar, 0, 0, 200, 200);
+  }
+
   return {
+    canvas: canvas,
+    canvasContext: ctx,
     show: this.show,
     hide: this.hide,
     createNewText: this.createNewText,

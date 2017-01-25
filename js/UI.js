@@ -1,6 +1,4 @@
 var UI = (function() {
-  document.execCommand('defaultParagraphSeparator', false, 'p');
-  document.execCommand('defaultParagraphSeparator', false, 'div');
 
   document.onkeydown = function(evt) {
     evt = evt || window.event;
@@ -83,8 +81,9 @@ var UI = (function() {
     };
 
     slideElement.style.width = (width * .8) + "px";
-    slideElement.style.height = (width * .8 * 9 / 16) + "px";
-    slideElement.style.top = ((height - width * .8 * 9 / 16) / 2) + "px";
+    slideElement.style.height = (width * 0.8 * 9 / 16) + "px";
+    //slideElement.style.top = ((height - width * .8 * 9 / 16) / 2) + "px";
+    slideElement.style.top = "2.5%";
     that.slideBody.appendChild(slideElement);
 
     var slideListIcon = slide.iconElement = document.createElement("div");
@@ -186,6 +185,7 @@ var UI = (function() {
       textToolbars[6].classList.remove("active");
     }
     textToolbars[8].getElementsByTagName("input")[0].value = Utils.getStyle(elem, "font-size");
+    textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color = elem.style.color;
   }
 
   var setResizeAnchorPosition = function(elem) {

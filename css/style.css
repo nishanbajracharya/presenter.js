@@ -115,7 +115,7 @@
   border: 1px solid #aaa;
 }
 
-.header-toolbar ul li .color-picker{
+.header-toolbar ul li.text-color .color-picker{
   position: absolute;
   top: 0;
   left: 0;
@@ -123,9 +123,17 @@
   padding: 10px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
   background: #fff;
-  width: 200px;
-  z-index: 30;
+  width: 222px;
+  z-index: 40;
   display: none;
+}
+
+.header-toolbar ul li.text-color:hover .color-picker {
+  display: block;
+}
+
+.color-picker canvas {
+  border: 1px solid #ccc;
 }
 
 .header button {
@@ -195,6 +203,7 @@
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
   background: #fff;
   overflow: hidden;
+  width: 80%;
 }
 
 .slide-body .slide p, .slide-body .slide div {
