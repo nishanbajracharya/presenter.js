@@ -16,17 +16,18 @@ var Toolbar = (function() {
   }
 
   this.createNewText = function(string, posX, posY) {
-    console.log("Create New Text")
+    //console.log("Create New Text")
     var text = new Tag("div", string, {x: posX, y: posY});
-    text.setStyle("padding", "5px");
+    text.setStyle("text-align", "left");
+    text.setStyle("font-size", UI.textToolbars[8].getElementsByTagName("input")[0].value + "px");
     text.setAttribute("contenteditable", true);
     return text;
   }
 
   this.createNewImage = function(src, posX, posY) {
-    console.log("Create New Image")
+    //console.log("Create New Image")
     var img = new Tag("img", "", {x: posX, y: posY});
-    img.setStyle("padding", "5px");
+    img.setStyle("text-align", "left");
     img.setAttribute("draggable", "false");
     img.setAttribute("src", src);
     return img;

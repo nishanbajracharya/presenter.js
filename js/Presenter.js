@@ -1,29 +1,14 @@
 (function() {
   var presentationMode = false;
 
-  var toolbar = document.getElementsByClassName("toolbar")[0];
-
-  var textToolbar = document.getElementsByClassName("text-toolbar")[0];
-
   var index = 0;
   var slidesArray = [];
 
-
-  var textToolbars = document.getElementsByClassName("header-toolbar-icon");
-
-  /*for (var i = 0; i < 3; i++) {
-    var slide = new Slide(i);
-    slidesArray.push(slide);
-    UI.createSlide(slide);
-
-    slide.iconElement.onclick = (function(i) {
-      return function() {
-        UI.viewSlide(slidesArray, i);
-      }
-    })(i);
-  };*/
-
+  var anchorSelected = false;
   var selectedCount = 0;
+  var selectedElement = null;
+  var selectedElementAspectRatio = 1;
+  var shiftKeyPressed = false;
 
   var slide = new Slide(0);
   slidesArray.push(slide);
@@ -37,18 +22,39 @@
 
   UI.viewSlide(slidesArray, 0);
 
-  document.getElementsByClassName("header-play-btn")[0].onclick = function() {
+  var getSlidesContent = function() {
+    var content = {};
+    for (var i = 0; i < slidesArray.length; i++) {
+      content[i] = slidesArray[i].content;
+    }
+    console.log(content);
+  }
+
+  document.onkeyup = function(e) {
+    if (e.keyCode === 13) {
+      getSlidesContent();
+    }
+    shiftKeyPressed = false;
+  }
+
+  document.onkeydown = function(e) {
+    if(e.shiftKey) {
+      shiftKeyPressed = true;
+    }else {
+      shiftKeyPressed = false;
+    }
+  }
+
+  UI.playBtn.onclick = function() {
     UI.startPresentation(slidesArray);
   }
 
   var clearSelectedElement = function() {
-    textToolbars[0].classList.remove("active");
-    textToolbars[1].classList.remove("active");
-    textToolbars[2].classList.remove("active");
-    console.log("clear");
-    for(var i = 0; i < slidesArray.length; i++) {
+    UI.clearTextToolbar();
+    //console.log("clear");
+    for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
-      for(var elem in slide.content) {
+      for (var elem in slide.content) {
         slide.content[elem].tagObj.selected = false;
         slide.content[elem].tagObj.element.style.outline = "none";
       }
@@ -59,34 +65,23 @@
 
   var selectElement = function(elem) {
     clearSelectedElement();
-    for(var i = 0; i < slidesArray.length; i++) {
+    for (var i = 0; i < slidesArray.length; i++) {
       slide = slidesArray[i];
-      for(var el in slide.content) {
-        if(slide.content[el].tagObj.element === elem) {
-          console.log("finally")
+      for (var el in slide.content) {
+        if (slide.content[el].tagObj.element === elem) {
+
+          UI.setResizeAnchorPosition(slide.content[el].tagObj.element);
+          UI.setDeleteElementPosition(slide.content[el].tagObj.element);
+
           slide.content[el].tagObj.selected = true;
           slide.content[el].tagObj.element.style.outline = "1px solid #49c";
-          if(elem.style.fontWeight === "bolder") {
-            textToolbars[0].classList.add("active");
-          }else {
-            textToolbars[0].classList.remove("active");
-          }
-          if(elem.style.fontStyle === "italic") {
-            textToolbars[1].classList.add("active");
-          }else {
-            textToolbars[1].classList.remove("active");
-          }
-          if(elem.style.textDecoration === "underline") {
-            textToolbars[2].classList.add("active");
-          }else {
-            textToolbars[2].classList.remove("active");
-          }
+          UI.setTextToolbarProps(elem);
         }
       }
     }
   }
 
-  document.getElementsByClassName("header-new-slide-btn")[0].onclick = function() {
+  UI.newSlideBtn.onclick = function() {
     var slide = new Slide(slidesArray.length);
     slidesArray.push(slide);
     UI.createSlide(slide);
@@ -127,39 +122,33 @@
       };*/
       //UI.viewSlide(slidesArray, index);
       //
-      
+
     };
   });
 
   document.addEventListener("mouseup", function(e) {
     selectedCount = 0;
-    for(var slide in slidesArray) {
+    for (var slide in slidesArray) {
       slidesArray[slide].updateElements();
-      if(!document.getElementsByClassName("header-toolbar")[0].contains(e.target)){
+      if (!UI.headerToolbar.contains(e.target)) {
         var slideContent = slidesArray[slide].content;
-        for(var el in slideContent) {
-          if(slideContent[el].tagObj.element === e.target) {
-            console.log("yes")
+        for (var el in slideContent) {
+          if (slideContent[el].tagObj.element === e.target) {
             selectedCount++;
             selectElement(e.target);
           }
         }
-      }else {
-        console.log("workd")
       }
     };
-    console.log(selectedCount);
-    if(selectedCount === 0) {
-
-      if(!document.getElementsByClassName("header-toolbar")[0].contains(e.target)){
-
+    if (selectedCount === 0) {
+      if (!UI.headerToolbar.contains(e.target)) {
         clearSelectedElement();
       }
     }
     //console.log(e);
-    if(e.which === 3) {
+    if (e.which === 3) {
       Toolbar.show(e);
-    }else {
+    } else {
       Toolbar.hide();
     }
 
@@ -167,23 +156,23 @@
 
   });
 
-  textToolbars[0].onclick = function() {
+  //Bold
+  UI.textToolbars[0].onclick = function() {
     var selectedElement = null;
-    for(var i = 0; i < slidesArray.length; i++) {
+    for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
-      for(var elem in slide.content) {
-        if(slide.content[elem].tagObj.selected) {
+      for (var elem in slide.content) {
+        if (slide.content[elem].tagObj.selected) {
           selectedElement = slide.content[elem].tagObj;
         }
-      } 
+      }
     }
-    if(selectedElement) {
-      console.log(selectedElement);
-      if(selectedElement.element.style.fontWeight === "bolder") {
+    if (selectedElement) {
+      if (selectedElement.element.style.fontWeight === "bolder") {
         selectedElement.element.style.fontWeight = "normal";
         selectedElement.setStyle("font-weight", "normal");
         this.classList.remove("active");
-      }else {
+      } else {
         selectedElement.element.style.fontWeight = "bolder";
         selectedElement.setStyle("font-weight", "bolder");
         this.classList.add("active");
@@ -191,53 +180,188 @@
     }
   }
 
-  textToolbars[1].onclick = function() {
+  //Italics
+  UI.textToolbars[1].onclick = function() {
     var selectedElement = null;
-    for(var i = 0; i < slidesArray.length; i++) {
+    for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
-      for(var elem in slide.content) {
-        if(slide.content[elem].tagObj.selected) {
+      for (var elem in slide.content) {
+        if (slide.content[elem].tagObj.selected) {
           selectedElement = slide.content[elem].tagObj;
-        }
-      } 
-    }
-    if(selectedElement) {
-      console.log(selectedElement);
-      if(selectedElement.element.style.fontStyle === "italic") {
+        };
+      };
+    };
+    if (selectedElement) {
+      //console.log(selectedElement);
+      if (selectedElement.element.style.fontStyle === "italic") {
         selectedElement.element.style.fontStyle = "normal";
         selectedElement.setStyle("font-style", "normal");
         this.classList.remove("active");
-      }else {
+      } else {
         selectedElement.element.style.fontStyle = "italic";
         selectedElement.setStyle("font-style", "italic");
         this.classList.add("active");
-      }
-    }
-  }
+      };
+    };
+  };
 
-  textToolbars[2].onclick = function() {
+  //Underline
+  UI.textToolbars[2].onclick = function() {
     var selectedElement = null;
-    for(var i = 0; i < slidesArray.length; i++) {
+    for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
-      for(var elem in slide.content) {
-        if(slide.content[elem].tagObj.selected) {
+      for (var elem in slide.content) {
+        if (slide.content[elem].tagObj.selected) {
           selectedElement = slide.content[elem].tagObj;
-        }
-      } 
-    }
-    if(selectedElement) {
-      console.log(selectedElement);
-      if(selectedElement.element.style.textDecoration === "underline") {
+        };
+      };
+    };
+    if (selectedElement) {
+      //console.log(selectedElement);
+      if (selectedElement.element.style.textDecoration === "underline") {
         selectedElement.element.style.textDecoration = "none";
         selectedElement.setStyle("text-decoration", "none");
         this.classList.remove("active");
-      }else {
+      } else {
         selectedElement.element.style.textDecoration = "underline";
         selectedElement.setStyle("text-decoration", "underline");
         this.classList.add("active");
-      }
-    }
-  }
+      };
+    };
+  };
+
+  // Align Left
+  UI.textToolbars[3].onclick = function() {
+    var selectedElement = null;
+    for (var i = 0; i < slidesArray.length; i++) {
+      var slide = slidesArray[i];
+      for (var elem in slide.content) {
+        if (slide.content[elem].tagObj.selected) {
+          selectedElement = slide.content[elem].tagObj;
+        };
+      };
+    };
+    if (selectedElement) {
+      //console.log(selectedElement);
+      selectedElement.element.style.textAlign = "left";
+      selectedElement.setStyle("text-align", "left");
+      this.classList.add("active");
+      UI.textToolbars[4].classList.remove("active");
+      UI.textToolbars[5].classList.remove("active");
+      UI.textToolbars[6].classList.remove("active");
+    };
+  };
+
+  // Align Center
+  UI.textToolbars[4].onclick = function() {
+    var selectedElement = null;
+    for (var i = 0; i < slidesArray.length; i++) {
+      var slide = slidesArray[i];
+      for (var elem in slide.content) {
+        if (slide.content[elem].tagObj.selected) {
+          selectedElement = slide.content[elem].tagObj;
+        };
+      };
+    };
+    if (selectedElement) {
+      //console.log(selectedElement);
+      selectedElement.element.style.textAlign = "center";
+      selectedElement.setStyle("text-align", "center");
+      this.classList.add("active");
+      UI.textToolbars[3].classList.remove("active");
+      UI.textToolbars[5].classList.remove("active");
+      UI.textToolbars[6].classList.remove("active");
+    };
+  };
+
+  // Align Right
+  UI.textToolbars[5].onclick = function() {
+    var selectedElement = null;
+    for (var i = 0; i < slidesArray.length; i++) {
+      var slide = slidesArray[i];
+      for (var elem in slide.content) {
+        if (slide.content[elem].tagObj.selected) {
+          selectedElement = slide.content[elem].tagObj;
+        };
+      };
+    };
+    if (selectedElement) {
+      //console.log(selectedElement);
+      selectedElement.element.style.textAlign = "right";
+      selectedElement.setStyle("text-align", "right");
+      this.classList.add("active");
+      UI.textToolbars[3].classList.remove("active");
+      UI.textToolbars[4].classList.remove("active");
+      UI.textToolbars[6].classList.remove("active");
+    };
+  };
+
+  // Align Right
+  UI.textToolbars[6].onclick = function() {
+    var selectedElement = null;
+    for (var i = 0; i < slidesArray.length; i++) {
+      var slide = slidesArray[i];
+      for (var elem in slide.content) {
+        if (slide.content[elem].tagObj.selected) {
+          selectedElement = slide.content[elem].tagObj;
+        };
+      };
+    };
+    if (selectedElement) {
+      //console.log(selectedElement);
+      selectedElement.element.style.textAlign = "justify";
+      selectedElement.setStyle("text-align", "justify");
+      this.classList.add("active");
+      UI.textToolbars[3].classList.remove("active");
+      UI.textToolbars[4].classList.remove("active");
+      UI.textToolbars[5].classList.remove("active");
+    };
+  };
+
+  UI.textToolbars[7].onclick = function(e) {
+    //UI.textToolbars[7].getElementsByClassName("font-list")[0].style.display = "none";
+    var selectedElement = null;
+    for (var i = 0; i < slidesArray.length; i++) {
+      var slide = slidesArray[i];
+      for (var elem in slide.content) {
+        if (slide.content[elem].tagObj.selected) {
+          selectedElement = slide.content[elem].tagObj;
+        };
+      };
+    };
+    if (selectedElement) {
+      selectedElement.element.style.fontFamily = e.target.getAttribute("data-name");
+      selectedElement.setStyle("font-family", e.target.getAttribute("data-name"));
+    };
+  };
+
+  UI.textToolbars[8].getElementsByTagName("input")[0].onkeyup = function(e) {
+    //console.log(this, this.value);
+    this.value = this.value.replace(/[^0-9]/g, '');
+    if (parseInt(this.value) > 70) {
+      this.value = 70;
+    };
+    if (this.value === "") {
+      this.value = 0;
+    };
+    this.value = parseInt(this.value);
+    var selectedElement = null;
+    for (var i = 0; i < slidesArray.length; i++) {
+      var slide = slidesArray[i];
+      for (var elem in slide.content) {
+        if (slide.content[elem].tagObj.selected) {
+          selectedElement = slide.content[elem].tagObj;
+        };
+      };
+    };
+
+    if (e.keyCode === 13) {
+      if (selectedElement) {
+        selectedElement.element.style.fontSize = this.value + "px";
+        selectedElement.setStyle("font-size", this.value + "px");
+      };
+    };
+  };
 
   var fullscreenHandler = function() {
     console.log(presentationMode);
@@ -256,24 +380,111 @@
   document.addEventListener('MSFullscreenChange', fullscreenHandler, false);
 
   //Create New Elements
-  toolbar.getElementsByClassName("toolbar-text")[0].onclick = function(e) {
-    //console.log(index, slidesArray[index]);
+  UI.toolbar.getElementsByClassName("toolbar-text")[0].onclick = function(e) {
     var slideIndex = UI.getCurrentSlideIndex();
     var pos = UI.getRelativePosition(slidesArray, e);
     slidesArray[slideIndex].addElement(Toolbar.createNewText("New Text", pos.posX, pos.posY));
-    
-    UI.updateSlide(slidesArray, slideIndex);
-  }
 
-  toolbar.getElementsByClassName("toolbar-img-input")[0].onchange = function(e) {
-    console.log(this.files[0]);
+    UI.updateSlide(slidesArray, slideIndex);
+  };
+
+  UI.toolbar.getElementsByClassName("toolbar-img-input")[0].onchange = function(e) {
+    //console.log(this.files[0]);
     var path = (window.URL || window.webkitURL).createObjectURL(this.files[0]);
-    console.log(path);
+    //console.log(path);
     //console.log(index, slidesArray[index]);
     var slideIndex = UI.getCurrentSlideIndex();
     var pos = UI.getRelativePosition(slidesArray, e);
     slidesArray[slideIndex].addElement(Toolbar.createNewImage(path, pos.posX, pos.posY));
-    
+
     UI.updateSlide(slidesArray, slideIndex);
-  }
+    this.files[0] = null;
+  };
+
+  UI.deleteElement.onmousedown = function(e) {
+    var selectedElement = null;
+
+    for (var i = 0; i < slidesArray.length; i++) {
+      var slide = slidesArray[i];
+      for (var el in slide.content) {
+        if (slide.content[el].tagObj.selected) {
+          //selectedElement = slide.content[el].tagObj;
+          slide.content[el].tagObj.element.parentElement.removeChild(slide.content[el].tagObj.element);
+          delete slide.content[slide.content[el].tagObj.index];
+        };
+      };
+    };
+
+  };
+
+  UI.resizeAnchor.onmousedown = function(e) {
+    anchorSelected = true;
+
+    var selectedElement = null;
+
+    for (var i = 0; i < slidesArray.length; i++) {
+      var slide = slidesArray[i];
+      for (var el in slide.content) {
+        if (slide.content[el].tagObj.selected) {
+          selectedElement = slide.content[el].tagObj;
+        };
+      };
+    };
+
+    selectedElementAspectRatio = Utils.getStyle(selectedElement.element, "width") / Utils.getStyle(selectedElement.element, "height");
+    //console.log(selectedElementAspectRatio);
+
+  };
+
+  document.onmousemove = function(e) {
+
+    var selectedElement = null;
+
+    for (var i = 0; i < slidesArray.length; i++) {
+      var slide = slidesArray[i];
+      for (var el in slide.content) {
+        if (slide.content[el].tagObj.selected) {
+          selectedElement = slide.content[el].tagObj;
+        };
+      };
+    };
+
+    if (anchorSelected) {
+      //console.log(selectedElement);
+      UI.resizeAnchor.style.top = (e.clientY - UI.slideBody.getBoundingClientRect().top - 4) + "px";
+      UI.resizeAnchor.style.left = (e.clientX - UI.slideBody.getBoundingClientRect().left - 4) + "px";
+      selectedElement.element.style.width = (parseFloat(UI.resizeAnchor.style.left) + 4 - parseFloat(selectedElement.element.style.left) - Utils.getStyle(selectedElement.element.parentElement, "margin-left")) + "px";
+      
+      if(shiftKeyPressed) {
+        selectedElement.element.style.height = (parseFloat(selectedElement.element.style.width) / selectedElementAspectRatio) + "px";
+      }else {
+        selectedElement.element.style.height = (parseFloat(UI.resizeAnchor.style.top) + 4 - parseFloat(selectedElement.element.style.top) - Utils.getStyle(selectedElement.element.parentElement, "top")) + "px";
+      }
+
+      selectedElement.setStyle("width", selectedElement.element.style.width);
+      selectedElement.setStyle("height", selectedElement.element.style.height);
+
+      UI.setDeleteElementPosition(selectedElement.element);
+    };
+  };
+
+  document.onmouseup = function() {
+    anchorSelected = false;
+
+    //var selectedCount = 0;
+
+    for (var i = 0; i < slidesArray.length; i++) {
+      var slide = slidesArray[i];
+      for (var el in slide.content) {
+        if (slide.content[el].tagObj.selected) {
+          selectedCount++;
+        };
+      };
+    };
+
+    if (selectedCount === 0) {
+      UI.resizeAnchor.style.display = "none";
+      UI.deleteElement.style.display = "none";
+    };
+  };
 })();

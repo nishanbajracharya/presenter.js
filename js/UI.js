@@ -1,10 +1,41 @@
 var UI = (function() {
+  document.execCommand('defaultParagraphSeparator', false, 'p');
+  document.execCommand('defaultParagraphSeparator', false, 'div');
+
+  document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode === 13 && !evt.shiftKey) {
+      if(evt.target.getAttribute("contenteditable") === "true") {
+        evt.preventDefault();
+        var caretPosition = window.getSelection().getRangeAt(0).startOffset;
+        console.log(caretPosition);
+        evt.target.innerHTML += "<br/><br/>";
+        var range = document.createRange();
+        console.log(evt.target.childNodes);
+
+        range.setStart(evt.target.firstChild, caretPosition);
+        range.setEnd(evt.target.firstChild, caretPosition);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+      };
+    };
+  };
+
   var that = this;
 
   var presentationElement = null;
   var presentationContainer = null;
 
   var currentSlideIndex = 0;
+
+  var toolbar = document.getElementsByClassName("toolbar")[0];
+  var textToolbars = document.getElementsByClassName("header-toolbar-icon");
+  var playBtn = document.getElementsByClassName("header-play-btn")[0];
+  var newSlideBtn = document.getElementsByClassName("header-new-slide-btn")[0];
+  var resizeAnchor = document.getElementsByClassName("resize-anchor")[0];
+  var deleteElement = document.getElementsByClassName("delete-element")[0];
+  var headerToolbar = document.getElementsByClassName("header-toolbar")[0]
+  var colorPicker = document.getElementsByClassName("color-picker")[0];
 
   this.selectedElement;
 
@@ -17,6 +48,11 @@ var UI = (function() {
   var height = Utils.getStyle(this.slideBody, "height");
 
   this.slides = [];
+
+  var fontList = textToolbars[7].getElementsByClassName("font-list-name");
+  for(var fIndex = 0, elem; elem = fontList[fIndex]; fIndex++) {
+    elem.style.fontFamily = elem.getAttribute("data-name");
+  }
 
   //Builder Mode
   var createSlide = function(slide) {
@@ -113,6 +149,66 @@ var UI = (function() {
     }
   }
 
+  var setTextToolbarProps = function(elem) {
+    if(elem.style.fontWeight === "bolder") {
+      textToolbars[0].classList.add("active");
+    }else {
+      textToolbars[0].classList.remove("active");
+    }
+    if(elem.style.fontStyle === "italic") {
+      textToolbars[1].classList.add("active");
+    }else {
+      textToolbars[1].classList.remove("active");
+    }
+    if(elem.style.textDecoration === "underline") {
+      textToolbars[2].classList.add("active");
+    }else {
+      textToolbars[2].classList.remove("active");
+    }
+    if(elem.style.textAlign === "left") {
+      textToolbars[3].classList.add("active");
+    }else {
+      textToolbars[3].classList.remove("active");
+    }
+    if(elem.style.textAlign === "center") {
+      textToolbars[4].classList.add("active");
+    }else {
+      textToolbars[4].classList.remove("active");
+    }
+    if(elem.style.textAlign === "right") {
+      textToolbars[5].classList.add("active");
+    }else {
+      textToolbars[5].classList.remove("active");
+    }
+    if(elem.style.textAlign === "justify") {
+      textToolbars[6].classList.add("active");
+    }else {
+      textToolbars[6].classList.remove("active");
+    }
+    textToolbars[8].getElementsByTagName("input")[0].value = Utils.getStyle(elem, "font-size");
+  }
+
+  var setResizeAnchorPosition = function(elem) {
+    resizeAnchor.style.left = (Utils.getStyle(elem, "left") + Utils.getStyle(elem, "width") + Utils.getStyle(elem.parentElement, "margin-left") - 4) + "px";
+    resizeAnchor.style.top = (Utils.getStyle(elem, "top") + Utils.getStyle(elem, "height") + Utils.getStyle(elem.parentElement, "margin-top") + 10) + "px";
+    resizeAnchor.style.display = "block";
+  }
+
+  var setDeleteElementPosition = function(elem) {
+    deleteElement.style.left = (Utils.getStyle(elem, "left") + Utils.getStyle(elem, "width") + Utils.getStyle(elem.parentElement, "margin-left") - 8) + "px";
+    deleteElement.style.top = (Utils.getStyle(elem, "top") + Utils.getStyle(elem.parentElement, "margin-top") + 4) + "px";
+    deleteElement.style.display = "block";
+  }
+
+  var clearTextToolbar = function() {
+    for(var i = 0, elem; elem = textToolbars[i]; i++) {
+      elem.classList.remove("active");
+    }
+  }
+
+
+
+
   // Presentation Mode
   var startPresentation = function(slidesArray) {
 
@@ -172,11 +268,28 @@ var UI = (function() {
   };
 
   return {
+    // Variables
+    slideBody: this.slideBody,
+    textToolbars: textToolbars,
+    playBtn: playBtn,
+    newSlideBtn: newSlideBtn,
+    resizeAnchor: resizeAnchor,
+    deleteElement: deleteElement,
+    toolbar: toolbar,
+    headerToolbar: headerToolbar,
+
+    // Builder Mode Methods
     createSlide: createSlide,
     viewSlide: viewSlide,
     updateSlide: updateSlide,
     getCurrentSlideIndex: getCurrentSlideIndex,
     getRelativePosition: getRelativePosition,
+    setTextToolbarProps: setTextToolbarProps,
+    setResizeAnchorPosition: setResizeAnchorPosition,
+    setDeleteElementPosition: setDeleteElementPosition,
+    clearTextToolbar: clearTextToolbar,
+
+    // Presentation Mode Methods
     startPresentation: startPresentation,
     exitPresentation: exitPresentation,
     movePresentationSlide: movePresentationSlide
