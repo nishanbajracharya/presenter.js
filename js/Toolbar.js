@@ -40,13 +40,19 @@ var Toolbar = (function() {
   var colorBar = new Image();
   colorBar.src="images/color-picker.png";
 
+  var bgCanvas = document.getElementsByClassName("color-bar")[1];
+  var bgCtx = bgCanvas.getContext('2d');
+
   colorBar.onload = function() {
     ctx.drawImage(colorBar, 0, 0, 200, 200);
+    bgCtx.drawImage(colorBar, 0, 0, 200, 200);
   }
 
   return {
     canvas: canvas,
     canvasContext: ctx,
+    bgCanvas: bgCanvas,
+    bgCanvasContext: bgCtx,
     show: this.show,
     hide: this.hide,
     createNewText: this.createNewText,

@@ -386,6 +386,29 @@
 
   }
 
+  Toolbar.bgCanvas.onmousedown = function(e) {
+    var posX = e.clientX - this.getBoundingClientRect().left;
+    var posY = e.clientY - this.getBoundingClientRect().top;
+    var imgData = Toolbar.bgCanvasContext.getImageData(posX, posY, 1, 1);
+    UI.textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color = "rgb(" + imgData.data[0] + "," + imgData.data[1] + "," + imgData.data[2] + ")";
+    
+    var selectedElement = null;
+    for (var i = 0; i < slidesArray.length; i++) {
+      var slide = slidesArray[i];
+      for (var elem in slide.content) {
+        if (slide.content[elem].tagObj.selected) {
+          selectedElement = slide.content[elem].tagObj;
+        };
+      };
+    };
+
+    if(selectedElement) {
+      selectedElement.element.style.background = UI.textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color;
+      selectedElement.setStyle("background", UI.textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color);
+    }
+
+  }
+
   var fullscreenHandler = function() {
     console.log(presentationMode);
     index = 0;
