@@ -33,6 +33,7 @@
     clearSelectedElement();
 
     document.getElementsByClassName("loading-gif")[0].style.display = "none";
+    document.getElementsByClassName("header-right")[0].style.display = "block";
   });
 
   /*var slide = new Slide(0);
