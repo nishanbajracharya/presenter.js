@@ -85,7 +85,6 @@ var UI = (function() {
       e.style.top = slide.content[elem].position.y + "px";
       e.style.left = slide.content[elem].position.x + "px";
 
-
       slideElement.appendChild(e);
     }
 
@@ -217,9 +216,6 @@ var UI = (function() {
     }
   };
 
-
-
-
   // Presentation Mode
   var startPresentation = function(slidesArray) {
 
@@ -245,7 +241,7 @@ var UI = (function() {
       presentationSlide.setAttribute("class", "presentation-slide");
       presentationSlide.innerHTML = slidesArray[i].element.innerHTML;
 
-      presentationSlide.style.width = Utils.getStyle(presentationElement, "width") + "px";
+      presentationSlide.style.width = (Utils.getStyle(presentationElement, "width") / fullscreenScale) + "px";
       presentationSlide.style.height = Utils.getStyle(presentationElement, "height") + "px";
       presentationSlide.style.left = (i * Utils.getStyle(presentationElement, "width")) + "px";
       presentationSlide.style.transform = "scale(" + fullscreenScale + ")";
