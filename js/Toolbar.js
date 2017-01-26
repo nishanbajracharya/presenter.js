@@ -20,9 +20,11 @@ var Toolbar = (function() {
   this.createNewText = function(string, posX, posY) {
     console.log("Create New Text Box")
     var text = new Tag("div", string, {x: posX, y: posY});
+    TagOperation.setStyle(text, "padding", "10px");
     TagOperation.setStyle(text, "text-align", "left");
     TagOperation.setStyle(text, "font-size", UI.textToolbars[8].getElementsByTagName("input")[0].value + "px");
     TagOperation.setStyle(text, "color", UI.textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color);
+    TagOperation.setStyle(text, "width", "calc(100% - 20px)");
     TagOperation.setAttribute(text, "contenteditable", true);
     return text;
   };
@@ -35,28 +37,7 @@ var Toolbar = (function() {
     TagOperation.setStyle(img, "padding", "5px");
     TagOperation.setStyle(img, "text-align", "left");
     TagOperation.setAttribute(img, "draggable", "false");
-
-    /*fileType = fileData.split(";")[0].substr(5);
-
-    var imgData = fileData.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
-
-    var byteCharacters = atob(imgData);
-
-    var byteNumbers = new Array(byteCharacters.length);
-    for (var i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-
-    var byteArray = new Uint8Array(byteNumbers);
-
-    var blob = new Blob([byteArray], {type: fileType});
-
-    //console.log(blob);
-
-    //console.log(file)
-    var path = (window.URL || window.webkitURL).createObjectURL(blob);*/
-    //console.log(path);
-    //TagOperation.setAttribute(img, "src", path);
+    TagOperation.setStyle(img, "width", "calc(50% - 10px)");
     TagOperation.getImageSrc(img);
     return img;
   };

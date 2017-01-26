@@ -31,6 +31,8 @@
     UI.viewSlide(slidesArray, 0);
 
     clearSelectedElement();
+
+    document.getElementsByClassName("loading-gif")[0].style.display = "none";
   });
 
   /*var slide = new Slide(0);
@@ -354,7 +356,6 @@
 
   UI.toolbar.getElementsByClassName("toolbar-img-input")[0].onchange = function(e) {
     var file = this.files[0];
-    //var path = (window.URL || window.webkitURL).createObjectURL(file);
 
     var slideIndex = UI.getCurrentSlideIndex();
     var pos = UI.getRelativePosition(slidesArray, e);
@@ -362,15 +363,12 @@
     var reader  = new FileReader();
 
     reader.addEventListener("load", function () {
-      //console.log(reader.result);
       slidesArray[slideIndex].addElement(Toolbar.createNewImage(reader.result.toString(), 0, 0));
 
       UI.updateSlide(slidesArray, slideIndex);
     }, false);
 
-
     reader.readAsDataURL(file);
-    //console.log(this.files[0], path);
   };
 
   UI.deleteElement.onmousedown = function(e) {

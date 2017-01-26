@@ -17,18 +17,12 @@ var Slide = function(index) {
     for(var elem in this.content) {
       if(this.content[elem].element !== null) {
         TagOperation.setValue(this.content[elem], this.content[elem].element.innerText);
-
       }
-      //console.log(this.content[elem])
     }
   };
 
   this.addElement = function(tag) {
     this.content[tag.index] = tag;
-    /*for(var attribute in tag.attributes) {
-      tag.element.setAttribute(attribute, tag.attributes[attribute]);
-    }*/
-    //this.content[tag.index].tagObj = tag;
     this.updateElements();
   };
 
@@ -38,8 +32,6 @@ var Slide = function(index) {
     TagOperation.setStyle(tag, "text-align", "left");
     TagOperation.setAttribute(tag, "contenteditable", true);
     that.content[tag.index] = tag;
-    //console.log(that.content[tag.index]);
-    //that.content[tag.index].tagObj = Object.create(tag);
     that.updateElements();
   })();
 
