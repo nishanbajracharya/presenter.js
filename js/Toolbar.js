@@ -1,4 +1,6 @@
 var Toolbar = (function() {
+  console.log("Toolbar");
+  
   var that = this;
 
   this.element = document.getElementsByClassName("toolbar")[0];
@@ -9,11 +11,11 @@ var Toolbar = (function() {
     that.element.style.display = "block";
     that.element.style.left = (mouse.clientX - Utils.getStyle(that.element, "width") / 2) + "px";
     that.element.style.top = (mouse.clientY - Utils.getStyle(that.element, "height") - 5) + "px";
-  }
+  };
 
   this.hide = function() {
     that.element.style.display = "none";
-  }
+  };
 
   this.createNewText = function(string, posX, posY) {
     //console.log("Create New Text")
@@ -23,7 +25,7 @@ var Toolbar = (function() {
     text.setStyle("color", UI.textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color);
     text.setAttribute("contenteditable", true);
     return text;
-  }
+  };
 
   this.createNewImage = function(src, posX, posY) {
     //console.log("Create New Image")
@@ -32,7 +34,7 @@ var Toolbar = (function() {
     img.setAttribute("draggable", "false");
     img.setAttribute("src", src);
     return img;
-  }
+  };
 
   var canvas = document.getElementsByClassName("color-bar")[0];
   var ctx = canvas.getContext('2d');
@@ -46,7 +48,7 @@ var Toolbar = (function() {
   colorBar.onload = function() {
     ctx.drawImage(colorBar, 0, 0, 200, 200);
     bgCtx.drawImage(colorBar, 0, 0, 200, 200);
-  }
+  };
 
   return {
     canvas: canvas,

@@ -1,4 +1,5 @@
 var UI = (function() {
+  console.log("UI");
 
   document.onkeydown = function(evt) {
     evt = evt || window.event;
@@ -15,8 +16,8 @@ var UI = (function() {
         range.setEnd(evt.target.firstChild, caretPosition);
         window.getSelection().removeAllRanges();
         window.getSelection().addRange(range);
-      };
-    };
+      }
+    }
   };
 
   var that = this;
@@ -32,10 +33,10 @@ var UI = (function() {
   var newSlideBtn = document.getElementsByClassName("header-new-slide-btn")[0];
   var resizeAnchor = document.getElementsByClassName("resize-anchor")[0];
   var deleteElement = document.getElementsByClassName("delete-element")[0];
-  var headerToolbar = document.getElementsByClassName("header-toolbar")[0]
+  var headerToolbar = document.getElementsByClassName("header-toolbar")[0];
   var colorPicker = document.getElementsByClassName("color-picker")[0];
 
-  this.selectedElement;
+  this.selectedElement = null;
 
   this.container = document.getElementsByClassName("main-container")[0];
   this.slidesList = this.container.getElementsByClassName("slides-list")[0];
@@ -63,24 +64,24 @@ var UI = (function() {
       slide.content[elem].tagObj.initMove(slideElement);
       if (slide.content[elem].value) {
         e.innerText = slide.content[elem].value;
-      };
+      }
 
       for (var attribute in slide.content[elem].attributes) {
         e.setAttribute(attribute, slide.content[elem].attributes[attribute]);
-      };
+      }
 
       for (var style in slide.content[elem].styles) {
         e.style[style] = slide.content[elem].styles[style];
-      };
+      }
 
       e.style.top = slide.content[elem].position.y + "px";
       e.style.left = slide.content[elem].position.x + "px";
 
 
       slideElement.appendChild(e);
-    };
+    }
 
-    slideElement.style.width = (width * .8) + "px";
+    slideElement.style.width = (width * 0.8) + "px";
     slideElement.style.height = (width * 0.8 * 9 / 16) + "px";
     //slideElement.style.top = ((height - width * .8 * 9 / 16) / 2) + "px";
     slideElement.style.top = "2.5%";
@@ -105,21 +106,21 @@ var UI = (function() {
       slide.content[elem].tagObj.initMove(slideElement);
       if (slide.content[elem].value) {
         e.innerText = slide.content[elem].value;
-      };
+      }
 
       for (var attribute in slide.content[elem].attributes) {
         e.setAttribute(attribute, slide.content[elem].attributes[attribute]);
-      };
+      }
 
       for (var style in slide.content[elem].styles) {
         e.style[style] = slide.content[elem].styles[style];
-      };
+      }
 
       e.style.top = slide.content[elem].position.y + "px";
       e.style.left = slide.content[elem].position.x + "px";
       slideElement.appendChild(e);
-    };
-  }
+    }
+  };
 
   var viewSlide = function(slideArray, index) {
     for (var i = 0; i < slideArray.length; i++) {
@@ -131,13 +132,13 @@ var UI = (function() {
       } else {
         slideArray[i].element.style.display = "none";
         slideArray[i].iconElement.className = "slide-list-icon";
-      };
-    };
+      }
+    }
   };
 
   var getCurrentSlideIndex = function() {
     return currentSlideIndex;
-  }
+  };
 
   var getRelativePosition = function(slideArray, e) {
     var posX = e.clientX - slideArray[currentSlideIndex].element.getBoundingClientRect().left - document.documentElement.scrollLeft;
@@ -145,8 +146,8 @@ var UI = (function() {
     return {
       posX: posX,
       posY: posY
-    }
-  }
+    };
+  };
 
   var setTextToolbarProps = function(elem) {
     if(elem.style.fontWeight === "bolder") {
@@ -187,25 +188,25 @@ var UI = (function() {
     textToolbars[8].getElementsByTagName("input")[0].value = Utils.getStyle(elem, "font-size");
     textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color = elem.style.color;
     textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color = elem.style.background;
-  }
+  };
 
   var setResizeAnchorPosition = function(elem) {
     resizeAnchor.style.left = (Utils.getStyle(elem, "left") + Utils.getStyle(elem, "width") + Utils.getStyle(elem.parentElement, "margin-left") - 4) + "px";
     resizeAnchor.style.top = (Utils.getStyle(elem, "top") + Utils.getStyle(elem, "height") + Utils.getStyle(elem.parentElement, "margin-top") + 10) + "px";
     resizeAnchor.style.display = "block";
-  }
+  };
 
   var setDeleteElementPosition = function(elem) {
     deleteElement.style.left = (Utils.getStyle(elem, "left") + Utils.getStyle(elem, "width") + Utils.getStyle(elem.parentElement, "margin-left") - 8) + "px";
     deleteElement.style.top = (Utils.getStyle(elem, "top") + Utils.getStyle(elem.parentElement, "margin-top") + 4) + "px";
     deleteElement.style.display = "block";
-  }
+  };
 
   var clearTextToolbar = function() {
     for(var i = 0, elem; elem = textToolbars[i]; i++) {
       elem.classList.remove("active");
     }
-  }
+  };
 
 
 
@@ -220,7 +221,7 @@ var UI = (function() {
       presentationElement = document.createElement("div");
       presentationElement.setAttribute("class", "presentation");
       document.body.appendChild(presentationElement);
-    };
+    }
 
     presentationElement.innerHTML = "";
 
@@ -241,7 +242,7 @@ var UI = (function() {
       presentationSlide.style.transform = "scale(" + fullscreenScale + ")";
 
       presentationContainer.appendChild(presentationSlide);
-    };
+    }
 
     // Go Fullscreen
     if (presentationElement.requestFullscreen) {
@@ -256,7 +257,7 @@ var UI = (function() {
     } else if (presentationElement.msRequestFullscreen) {
       console.log("MS Fullscreen");
       presentationElement.msRequestFullscreen();
-    };
+    }
 
   };
 
