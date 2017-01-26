@@ -30,6 +30,7 @@ var Toolbar = (function() {
   this.createNewImage = function(src, posX, posY) {
     console.log("Create New Image Image")
     var img = new Tag("img", "", {x: posX, y: posY});
+    img.setStyle("padding", "5px");
     img.setStyle("text-align", "left");
     img.setAttribute("draggable", "false");
     img.setAttribute("src", src);
