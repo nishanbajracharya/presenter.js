@@ -61,6 +61,7 @@
         slide.content[elem].tagObj.element.style.outline = "none";
       }
     }
+    selectedElement = null;
   };
 
   clearSelectedElement();
@@ -78,6 +79,7 @@
           slide.content[el].tagObj.selected = true;
           slide.content[el].tagObj.element.style.outline = "1px solid #49c";
           UI.setTextToolbarProps(elem);
+          selectedElement = slide.content[el].tagObj;
         }
       }
     }
@@ -160,7 +162,7 @@
 
   //Bold
   UI.textToolbars[0].onclick = function() {
-    var selectedElement = null;
+    /*var selectedElement = null;
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
       for (var elem in slide.content) {
@@ -168,7 +170,8 @@
           selectedElement = slide.content[elem].tagObj;
         }
       }
-    }
+    }*/
+    console.log(selectedElement);
     if (selectedElement) {
       if (selectedElement.element.style.fontWeight === "bolder") {
         selectedElement.element.style.fontWeight = "normal";
@@ -184,7 +187,7 @@
 
   //Italics
   UI.textToolbars[1].onclick = function() {
-    var selectedElement = null;
+    /*var selectedElement = null;
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
       for (var elem in slide.content) {
@@ -192,7 +195,7 @@
           selectedElement = slide.content[elem].tagObj;
         }
       }
-    }
+    }*/
     if (selectedElement) {
       //console.log(selectedElement);
       if (selectedElement.element.style.fontStyle === "italic") {
@@ -209,7 +212,7 @@
 
   //Underline
   UI.textToolbars[2].onclick = function() {
-    var selectedElement = null;
+    /*var selectedElement = null;
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
       for (var elem in slide.content) {
@@ -217,7 +220,7 @@
           selectedElement = slide.content[elem].tagObj;
         }
       }
-    }
+    }*/
     if (selectedElement) {
       //console.log(selectedElement);
       if (selectedElement.element.style.textDecoration === "underline") {
@@ -234,7 +237,7 @@
 
   // Align Left
   UI.textToolbars[3].onclick = function() {
-    var selectedElement = null;
+    /*var selectedElement = null;
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
       for (var elem in slide.content) {
@@ -242,7 +245,7 @@
           selectedElement = slide.content[elem].tagObj;
         }
       }
-    }
+    }*/
     if (selectedElement) {
       //console.log(selectedElement);
       selectedElement.element.style.textAlign = "left";
@@ -256,7 +259,7 @@
 
   // Align Center
   UI.textToolbars[4].onclick = function() {
-    var selectedElement = null;
+    /*var selectedElement = null;
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
       for (var elem in slide.content) {
@@ -264,7 +267,7 @@
           selectedElement = slide.content[elem].tagObj;
         }
       }
-    }
+    }*/
     if (selectedElement) {
       //console.log(selectedElement);
       selectedElement.element.style.textAlign = "center";
@@ -278,7 +281,7 @@
 
   // Align Right
   UI.textToolbars[5].onclick = function() {
-    var selectedElement = null;
+    /*var selectedElement = null;
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
       for (var elem in slide.content) {
@@ -286,7 +289,7 @@
           selectedElement = slide.content[elem].tagObj;
         }
       }
-    }
+    }*/
     if (selectedElement) {
       //console.log(selectedElement);
       selectedElement.element.style.textAlign = "right";
@@ -300,7 +303,7 @@
 
   // Align Right
   UI.textToolbars[6].onclick = function() {
-    var selectedElement = null;
+    /*var selectedElement = null;
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
       for (var elem in slide.content) {
@@ -308,7 +311,7 @@
           selectedElement = slide.content[elem].tagObj;
         }
       }
-    }
+    }*/
     if (selectedElement) {
       //console.log(selectedElement);
       selectedElement.element.style.textAlign = "justify";
@@ -322,7 +325,7 @@
 
   UI.textToolbars[7].onclick = function(e) {
     //UI.textToolbars[7].getElementsByClassName("font-list")[0].style.display = "none";
-    var selectedElement = null;
+    /*var selectedElement = null;
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
       for (var elem in slide.content) {
@@ -330,7 +333,7 @@
           selectedElement = slide.content[elem].tagObj;
         }
       }
-    }
+    }*/
     if (selectedElement) {
       selectedElement.element.style.fontFamily = e.target.getAttribute("data-name");
       selectedElement.setStyle("font-family", e.target.getAttribute("data-name"));
@@ -347,7 +350,7 @@
       this.value = 0;
     }
     this.value = parseInt(this.value);
-    var selectedElement = null;
+    /*var selectedElement = null;
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
       for (var elem in slide.content) {
@@ -355,7 +358,7 @@
           selectedElement = slide.content[elem].tagObj;
         }
       }
-    }
+    }*/
 
     if (e.keyCode === 13) {
       if (selectedElement) {
@@ -371,7 +374,7 @@
     var imgData = Toolbar.canvasContext.getImageData(posX, posY, 1, 1);
     UI.textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color = "rgb(" + imgData.data[0] + "," + imgData.data[1] + "," + imgData.data[2] + ")";
     
-    var selectedElement = null;
+    /*var selectedElement = null;
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
       for (var elem in slide.content) {
@@ -379,7 +382,7 @@
           selectedElement = slide.content[elem].tagObj;
         }
       }
-    }
+    }*/
 
     if(selectedElement) {
       selectedElement.element.style.color = UI.textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color;
@@ -394,7 +397,7 @@
     var imgData = Toolbar.bgCanvasContext.getImageData(posX, posY, 1, 1);
     UI.textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color = "rgb(" + imgData.data[0] + "," + imgData.data[1] + "," + imgData.data[2] + ")";
     
-    var selectedElement = null;
+    /*var selectedElement = null;
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
       for (var elem in slide.content) {
@@ -402,7 +405,7 @@
           selectedElement = slide.content[elem].tagObj;
         }
       }
-    }
+    }*/
 
     if(selectedElement) {
       selectedElement.element.style.background = UI.textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color;
@@ -412,7 +415,7 @@
   };
 
   UI.textToolbars[10].getElementsByClassName("font-bg-clear-btn")[0].onmousedown = function() {
-    var selectedElement = null;
+    /*var selectedElement = null;
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
       for (var elem in slide.content) {
@@ -420,7 +423,7 @@
           selectedElement = slide.content[elem].tagObj;
         }
       }
-    }
+    }*/
 
     if(selectedElement) {
       selectedElement.element.style.background = "none";
