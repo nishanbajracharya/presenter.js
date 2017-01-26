@@ -95,9 +95,10 @@ var UI = (function() {
     that.slideBody.appendChild(slideElement);
 
     var slideListIcon = slide.iconElement = document.createElement("div");
+    slide.thumbnail = slideListIcon;
     slideListIcon.setAttribute("class", "slide-list-icon");
     slideListIcon.setAttribute("index", slide.index);
-    slideListIcon.innerHTML = "<p>" + (slide.index + 1) + "</p>";
+    slideListIcon.innerHTML = "<div class='thumbnail'><div class='thumbnail-content'>" + slide.element.innerHTML + "</div></div>";
 
     that.slidesList.appendChild(slideListIcon);
 
@@ -126,6 +127,8 @@ var UI = (function() {
       e.style.top = slide.content[elem].position.y + "px";
       e.style.left = slide.content[elem].position.x + "px";
       slideElement.appendChild(e);
+      slide.thumbnail.innerHTML = "<div class='thumbnail'><div class='thumbnail-content'>" + slide.element.innerHTML + "</div></div>";
+
     }
   };
 

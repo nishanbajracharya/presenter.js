@@ -195,18 +195,28 @@
   background: #ccc;
 }
 
-.slides-list .slide-list-icon p {
+.slide-list-icon .thumbnail {
   width: 160px;
-  line-height: 90px;
+  height: 90px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
   background: #fff;
-  text-align: center;
-  font-size: 30px;
-  color: #666;
   border: 2px solid rgba(0,0,0,0);
+  overflow: hidden;
 }
 
-.slides-list .slide-list-icon.active p{
+.thumbnail-content {
+  width: 932.8px;
+  height: 524.69px;
+  transform-origin: top left;
+  transform: scale(0.1715);
+}
+
+.thumbnail-content * {
+  position: absolute;
+  pointer-events: none;
+}
+
+.slide-list-icon.active .thumbnail{
   border: 2px solid #49c;
 }
 
@@ -230,7 +240,6 @@
 .slide-body .slide p, .slide-body .slide div {
   box-sizing: border-box;
   border: 1px dashed #ccc;
-  outline: none;
   width: calc(50% - 10px);
   padding: 10px;
 }

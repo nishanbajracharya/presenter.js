@@ -24,7 +24,7 @@ var Toolbar = (function() {
     TagOperation.setStyle(text, "text-align", "left");
     TagOperation.setStyle(text, "font-size", UI.textToolbars[8].getElementsByTagName("input")[0].value + "px");
     TagOperation.setStyle(text, "color", UI.textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color);
-    TagOperation.setStyle(text, "width", "calc(100% - 20px)");
+    TagOperation.setStyle(text, "width", "calc(50% - 20px)");
     TagOperation.setAttribute(text, "contenteditable", true);
     return text;
   };

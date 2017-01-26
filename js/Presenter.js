@@ -103,7 +103,8 @@
           UI.setDeleteElementPosition(slide.content[el].element);
 
           slide.content[el].selected = true;
-          slide.content[el].element.style.outline = "1px solid #49c";
+          console.log(elem)
+          elem.style.outline = "1px solid #49c";
           UI.setTextToolbarProps(elem);
           selectedElement = slide.content[el];
         }
@@ -373,8 +374,6 @@
   };
 
   UI.deleteElement.onmousedown = function(e) {
-    var selectedElement = null;
-
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
       for (var el in slide.content) {
@@ -389,31 +388,13 @@
   UI.resizeAnchor.onmousedown = function(e) {
     anchorSelected = true;
 
-    var selectedElement = null;
-
-    for (var i = 0; i < slidesArray.length; i++) {
-      var slide = slidesArray[i];
-      for (var el in slide.content) {
-        if (slide.content[el].selected) {
-          selectedElement = slide.content[el];
-        }
-      }
-    }
-
     selectedElementAspectRatio = Utils.getStyle(selectedElement.element, "width") / Utils.getStyle(selectedElement.element, "height");
   };
 
   document.onmousemove = function(e) {
 
-    var selectedElement = null;
-
-    for (var i = 0; i < slidesArray.length; i++) {
-      var slide = slidesArray[i];
-      for (var el in slide.content) {
-        if (slide.content[el].selected) {
-          selectedElement = slide.content[el];
-        }
-      }
+    if(selectedElement) {
+      //UI.updateSlide(slidesArray, UI.getCurrentSlideIndex());
     }
 
     if (anchorSelected) {
@@ -449,6 +430,7 @@
     if (selectedCount === 0) {
       UI.resizeAnchor.style.display = "none";
       UI.deleteElement.style.display = "none";
+      UI.updateSlide(slidesArray, UI.getCurrentSlideIndex());
     }
   };
 })();
