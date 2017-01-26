@@ -7,10 +7,10 @@ var UI = (function() {
       if(evt.target.getAttribute("contenteditable") === "true") {
         evt.preventDefault();
         var caretPosition = window.getSelection().getRangeAt(0).startOffset;
-        console.log(caretPosition);
+        //console.log(caretPosition);
         evt.target.innerHTML += "<br/><br/>";
         var range = document.createRange();
-        console.log(evt.target.childNodes);
+        //console.log(evt.target.childNodes);
 
         range.setStart(evt.target.firstChild, caretPosition);
         range.setEnd(evt.target.firstChild, caretPosition);
@@ -31,6 +31,7 @@ var UI = (function() {
   var textToolbars = document.getElementsByClassName("header-toolbar-icon");
   var playBtn = document.getElementsByClassName("header-play-btn")[0];
   var newSlideBtn = document.getElementsByClassName("header-new-slide-btn")[0];
+  var saveBtn = document.getElementsByClassName("header-save-btn")[0];
   var resizeAnchor = document.getElementsByClassName("resize-anchor")[0];
   var deleteElement = document.getElementsByClassName("delete-element")[0];
   var headerToolbar = document.getElementsByClassName("header-toolbar")[0];
@@ -60,8 +61,8 @@ var UI = (function() {
     slide.element = slideElement;
     for (var elem in slide.content) {
       var e = document.createElement(slide.content[elem].tag);
-      slide.content[elem].tagObj.element = e;
-      slide.content[elem].tagObj.initMove(slideElement);
+      slide.content[elem].element = e;
+      TagOperation.initMove(slide.content[elem], slideElement);
       if (slide.content[elem].value) {
         e.innerText = slide.content[elem].value;
       }
@@ -102,8 +103,8 @@ var UI = (function() {
     slideElement.innerHTML = "";
     for (var elem in slide.content) {
       var e = document.createElement(slide.content[elem].tag);
-      slide.content[elem].tagObj.element = e;
-      slide.content[elem].tagObj.initMove(slideElement);
+      slide.content[elem].element = e;
+      TagOperation.initMove(slide.content[elem], slideElement);
       if (slide.content[elem].value) {
         e.innerText = slide.content[elem].value;
       }
@@ -275,6 +276,7 @@ var UI = (function() {
     textToolbars: textToolbars,
     playBtn: playBtn,
     newSlideBtn: newSlideBtn,
+    saveBtn: saveBtn,
     resizeAnchor: resizeAnchor,
     deleteElement: deleteElement,
     toolbar: toolbar,
