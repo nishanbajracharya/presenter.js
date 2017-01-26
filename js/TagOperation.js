@@ -53,7 +53,7 @@ var TagOperation = (function() {
   this.getImageSrc = function(tag) {
     var fileData = tag.fileData;
     var fileType = fileData.split(";")[0].substr(5);
-    var imgData = fileData.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
+    var imgData = fileData.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, '');
 
     var byteCharacters = atob(imgData);
     var byteNumbers = new Array(byteCharacters.length);
