@@ -1,6 +1,6 @@
 var Toolbar = (function() {
   console.log("Toolbar");
-  
+
   var that = this;
 
   this.element = document.getElementsByClassName("toolbar")[0];
@@ -18,7 +18,7 @@ var Toolbar = (function() {
   };
 
   this.createNewText = function(string, posX, posY) {
-    //console.log("Create New Text")
+    console.log("Create New Text Box")
     var text = new Tag("div", string, {x: posX, y: posY});
     text.setStyle("text-align", "left");
     text.setStyle("font-size", UI.textToolbars[8].getElementsByTagName("input")[0].value + "px");
@@ -28,7 +28,7 @@ var Toolbar = (function() {
   };
 
   this.createNewImage = function(src, posX, posY) {
-    //console.log("Create New Image")
+    console.log("Create New Image Image")
     var img = new Tag("img", "", {x: posX, y: posY});
     img.setStyle("text-align", "left");
     img.setAttribute("draggable", "false");
