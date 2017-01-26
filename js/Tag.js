@@ -29,6 +29,8 @@ var Tag = function(tag, value, position, attributes, styles) {
   this.position = position;
   this.styles = styles;
   this.attributes = attributes;
+  
+  this.fileData = null;
 
   this.element = null;
   this.toolbar = null;

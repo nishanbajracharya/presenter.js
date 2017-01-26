@@ -50,11 +50,35 @@ var TagOperation = (function() {
     });
   };
 
+  this.getImageSrc = function(tag) {
+    var fileData = tag.fileData;
+
+    var fileType = fileData.split(";")[0].substr(5);
+
+    var imgData = fileData.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
+
+    var byteCharacters = atob(imgData);
+
+    var byteNumbers = new Array(byteCharacters.length);
+    for (var i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+
+    var byteArray = new Uint8Array(byteNumbers);
+
+    var blob = new Blob([byteArray], {type: fileType});
+
+    var path = (window.URL || window.webkitURL).createObjectURL(blob);
+
+    tag.attributes.src = path;
+  }
+
   return {
     setStyle: this.setStyle,
     setAttribute: this.setAttribute,
     setValue: this.setValue,
-    initMove: this.initMove
+    initMove: this.initMove,
+    getImageSrc: this.getImageSrc
   }
 
 })();

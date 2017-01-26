@@ -27,13 +27,37 @@ var Toolbar = (function() {
     return text;
   };
 
-  this.createNewImage = function(src, posX, posY) {
+  this.createNewImage = function(fileData, posX, posY) {
     console.log("Create New Image")
     var img = new Tag("img", "", {x: posX, y: posY});
+
+    img.fileData = fileData;
     TagOperation.setStyle(img, "padding", "5px");
     TagOperation.setStyle(img, "text-align", "left");
     TagOperation.setAttribute(img, "draggable", "false");
-    TagOperation.setAttribute(img, "src", src);
+
+    /*fileType = fileData.split(";")[0].substr(5);
+
+    var imgData = fileData.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
+
+    var byteCharacters = atob(imgData);
+
+    var byteNumbers = new Array(byteCharacters.length);
+    for (var i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+
+    var byteArray = new Uint8Array(byteNumbers);
+
+    var blob = new Blob([byteArray], {type: fileType});
+
+    //console.log(blob);
+
+    //console.log(file)
+    var path = (window.URL || window.webkitURL).createObjectURL(blob);*/
+    //console.log(path);
+    //TagOperation.setAttribute(img, "src", path);
+    TagOperation.getImageSrc(img);
     return img;
   };
 

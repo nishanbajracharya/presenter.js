@@ -71,6 +71,11 @@ var UI = (function() {
         e.setAttribute(attribute, slide.content[elem].attributes[attribute]);
       }
 
+      if(slide.content[elem].attributes.hasOwnProperty("src")) {
+        TagOperation.getImageSrc(slide.content[elem]);
+        e.setAttribute(attribute, slide.content[elem].attributes.src);
+      }
+
       for (var style in slide.content[elem].styles) {
         e.style[style] = slide.content[elem].styles[style];
       }
@@ -144,6 +149,7 @@ var UI = (function() {
   var getRelativePosition = function(slideArray, e) {
     var posX = e.clientX - slideArray[currentSlideIndex].element.getBoundingClientRect().left - document.documentElement.scrollLeft;
     var posY = e.clientY - slideArray[currentSlideIndex].element.getBoundingClientRect().top - document.documentElement.scrollTop;
+    //console.log(posX);
     return {
       posX: posX,
       posY: posY
