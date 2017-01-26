@@ -52,6 +52,7 @@ var TagOperation = (function() {
 
   this.getImageSrc = function(tag) {
     var fileData = tag.fileData;
+    console.log(fileData);
 
     var fileType = fileData.split(";")[0].substr(5);
 

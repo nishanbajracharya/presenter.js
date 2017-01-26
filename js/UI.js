@@ -68,7 +68,9 @@ var UI = (function() {
       }
 
       for (var attribute in slide.content[elem].attributes) {
-        e.setAttribute(attribute, slide.content[elem].attributes[attribute]);
+        if(attribute !== "src") {
+          e.setAttribute(attribute, slide.content[elem].attributes[attribute]);
+        }
       }
 
       if(slide.content[elem].attributes.hasOwnProperty("src")) {
