@@ -1,4 +1,5 @@
 var Utils = (function() {
+  console.log("Utils");
   /**
    * Get a computed style of a DOM element
    * @param  {DOM Element} element The target DOM element
@@ -73,7 +74,7 @@ var Utils = (function() {
     }
 
     return character;
-  }
+  };
 
   return {
     getStyle: getStyle,

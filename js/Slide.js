@@ -1,4 +1,6 @@
 var Slide = function(index) {
+  console.log("Slide");
+
   var that = this;
 
   if(!index) {
@@ -12,7 +14,7 @@ var Slide = function(index) {
   this.content = {};
 
   this.updateElements = function() {
-    for(elem in this.content) {
+    for(var elem in this.content) {
       var tagObj = this.content[elem].tagObj;
       if(this.content[tagObj.index].tagObj.element !== null) {
         this.content[tagObj.index].tagObj.setValue(this.content[tagObj.index].tagObj.element.innerText);
@@ -26,7 +28,7 @@ var Slide = function(index) {
     this.content[tag.index] = tag.getProps();
     this.content[tag.index].tagObj = tag;
     this.updateElements();
-  }
+  };
 
   this.init = (function() {
     var tag = new Tag("div", "Slide", {x: 5, y: 5});

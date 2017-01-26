@@ -3,17 +3,17 @@ var Tag = function(tag, value, position, attributes, styles) {
 
   if(!tag) {
     tag = "div";
-  };
+  }
 
   if(!value) {
     value = "";
-  };
+  }
 
   if(!position) {
     position = {
       x: 0,
       y: 0
-    }
+    };
   }
 
   if(!styles) {
@@ -67,18 +67,18 @@ var Tag = function(tag, value, position, attributes, styles) {
   this.setValue = function(string) {
     this.value = string;
     //console.log(this.value);
-  }
+  };
 
   this.initMove = function(container){
 
     var posX = 0;
     var posY = 0;
     var movingElementFlag = false;
-    var containerPosition = container.getBoundingClientRect();
+    //var containerPosition = container.getBoundingClientRect();
 
     that.element.addEventListener("mousedown", function(e) {
       posX = e.clientX - that.element.getBoundingClientRect().left + document.documentElement.scrollLeft;
-      posY = e.clientY - that.element.getBoundingClientRect().top + document.documentElement.scrollTop
+      posY = e.clientY - that.element.getBoundingClientRect().top + document.documentElement.scrollTop;
       movingElementFlag = true;
     });
 
@@ -88,7 +88,7 @@ var Tag = function(tag, value, position, attributes, styles) {
         that.position = {
           x: that.element.getBoundingClientRect().left - that.element.parentElement.getBoundingClientRect().left,
           y: that.element.getBoundingClientRect().top  - that.element.parentElement.getBoundingClientRect().top
-        }
+        };
         //console.log(that, that.position);
       }
       movingElementFlag = false;
@@ -99,7 +99,7 @@ var Tag = function(tag, value, position, attributes, styles) {
         var parentContainerPosition = {
           x: that.element.parentElement.getBoundingClientRect().left + document.documentElement.scrollLeft,
           y: that.element.parentElement.getBoundingClientRect().top + document.documentElement.scrollTop
-        }
+        };
         //console.log(that.element.parentElement, parentContainerPosition);
         document.body.style.cursor = "move";
         that.element.style.left = (e.clientX - parentContainerPosition.x - posX) + "px";

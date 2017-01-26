@@ -1,4 +1,6 @@
 (function() {
+  console.log("presenter.js");
+
   var presentationMode = false;
 
   var index = 0;
@@ -17,7 +19,7 @@
   slide.iconElement.onclick = (function(i) {
     return function() {
       UI.viewSlide(slidesArray, i);
-    }
+    };
   })(0);
 
   UI.viewSlide(slidesArray, 0);
@@ -28,14 +30,14 @@
       content[i] = slidesArray[i].content;
     }
     console.log(content);
-  }
+  };
 
   document.onkeyup = function(e) {
     if (e.keyCode === 13) {
       getSlidesContent();
     }
     shiftKeyPressed = false;
-  }
+  };
 
   document.onkeydown = function(e) {
     if(e.shiftKey) {
@@ -43,11 +45,11 @@
     }else {
       shiftKeyPressed = false;
     }
-  }
+  };
 
   UI.playBtn.onclick = function() {
     UI.startPresentation(slidesArray);
-  }
+  };
 
   var clearSelectedElement = function() {
     UI.clearTextToolbar();
@@ -59,7 +61,7 @@
         slide.content[elem].tagObj.element.style.outline = "none";
       }
     }
-  }
+  };
 
   clearSelectedElement();
 
@@ -79,7 +81,7 @@
         }
       }
     }
-  }
+  };
 
   UI.newSlideBtn.onclick = function() {
     var slide = new Slide(slidesArray.length);
@@ -89,11 +91,11 @@
     slide.iconElement.onclick = (function(i) {
       return function() {
         UI.viewSlide(slidesArray, i);
-      }
+      };
     })(slidesArray.length - 1);
 
     UI.viewSlide(slidesArray, slidesArray.length - 1);
-  }
+  };
 
   document.addEventListener("keyup", function(e) {
     /**
@@ -106,15 +108,15 @@
         index--;
         if (index < 0) {
           index = 0;
-        };
-      };
+        }
+      }
 
       if (e.keyCode === 39 || e.keyCode === 32) {
         index++;
         if (index > slidesArray.length - 1) {
           index = slidesArray.length - 1;
-        };
-      };
+        }
+      }
       UI.movePresentationSlide(index);
     } else {
       /*if (e.keyCode === 13) {
@@ -123,7 +125,7 @@
       //UI.viewSlide(slidesArray, index);
       //
 
-    };
+    }
   });
 
   document.addEventListener("mouseup", function(e) {
@@ -139,7 +141,7 @@
           }
         }
       }
-    };
+    }
     if (selectedCount === 0) {
       if (!UI.headerToolbar.contains(e.target)) {
         clearSelectedElement();
@@ -178,7 +180,7 @@
         this.classList.add("active");
       }
     }
-  }
+  };
 
   //Italics
   UI.textToolbars[1].onclick = function() {
@@ -188,9 +190,9 @@
       for (var elem in slide.content) {
         if (slide.content[elem].tagObj.selected) {
           selectedElement = slide.content[elem].tagObj;
-        };
-      };
-    };
+        }
+      }
+    }
     if (selectedElement) {
       //console.log(selectedElement);
       if (selectedElement.element.style.fontStyle === "italic") {
@@ -201,8 +203,8 @@
         selectedElement.element.style.fontStyle = "italic";
         selectedElement.setStyle("font-style", "italic");
         this.classList.add("active");
-      };
-    };
+      }
+    }
   };
 
   //Underline
@@ -213,9 +215,9 @@
       for (var elem in slide.content) {
         if (slide.content[elem].tagObj.selected) {
           selectedElement = slide.content[elem].tagObj;
-        };
-      };
-    };
+        }
+      }
+    }
     if (selectedElement) {
       //console.log(selectedElement);
       if (selectedElement.element.style.textDecoration === "underline") {
@@ -226,8 +228,8 @@
         selectedElement.element.style.textDecoration = "underline";
         selectedElement.setStyle("text-decoration", "underline");
         this.classList.add("active");
-      };
-    };
+      }
+    }
   };
 
   // Align Left
@@ -238,9 +240,9 @@
       for (var elem in slide.content) {
         if (slide.content[elem].tagObj.selected) {
           selectedElement = slide.content[elem].tagObj;
-        };
-      };
-    };
+        }
+      }
+    }
     if (selectedElement) {
       //console.log(selectedElement);
       selectedElement.element.style.textAlign = "left";
@@ -249,7 +251,7 @@
       UI.textToolbars[4].classList.remove("active");
       UI.textToolbars[5].classList.remove("active");
       UI.textToolbars[6].classList.remove("active");
-    };
+    }
   };
 
   // Align Center
@@ -260,9 +262,9 @@
       for (var elem in slide.content) {
         if (slide.content[elem].tagObj.selected) {
           selectedElement = slide.content[elem].tagObj;
-        };
-      };
-    };
+        }
+      }
+    }
     if (selectedElement) {
       //console.log(selectedElement);
       selectedElement.element.style.textAlign = "center";
@@ -271,7 +273,7 @@
       UI.textToolbars[3].classList.remove("active");
       UI.textToolbars[5].classList.remove("active");
       UI.textToolbars[6].classList.remove("active");
-    };
+    }
   };
 
   // Align Right
@@ -282,9 +284,9 @@
       for (var elem in slide.content) {
         if (slide.content[elem].tagObj.selected) {
           selectedElement = slide.content[elem].tagObj;
-        };
-      };
-    };
+        }
+      }
+    }
     if (selectedElement) {
       //console.log(selectedElement);
       selectedElement.element.style.textAlign = "right";
@@ -293,7 +295,7 @@
       UI.textToolbars[3].classList.remove("active");
       UI.textToolbars[4].classList.remove("active");
       UI.textToolbars[6].classList.remove("active");
-    };
+    }
   };
 
   // Align Right
@@ -304,9 +306,9 @@
       for (var elem in slide.content) {
         if (slide.content[elem].tagObj.selected) {
           selectedElement = slide.content[elem].tagObj;
-        };
-      };
-    };
+        }
+      }
+    }
     if (selectedElement) {
       //console.log(selectedElement);
       selectedElement.element.style.textAlign = "justify";
@@ -315,7 +317,7 @@
       UI.textToolbars[3].classList.remove("active");
       UI.textToolbars[4].classList.remove("active");
       UI.textToolbars[5].classList.remove("active");
-    };
+    }
   };
 
   UI.textToolbars[7].onclick = function(e) {
@@ -326,13 +328,13 @@
       for (var elem in slide.content) {
         if (slide.content[elem].tagObj.selected) {
           selectedElement = slide.content[elem].tagObj;
-        };
-      };
-    };
+        }
+      }
+    }
     if (selectedElement) {
       selectedElement.element.style.fontFamily = e.target.getAttribute("data-name");
       selectedElement.setStyle("font-family", e.target.getAttribute("data-name"));
-    };
+    }
   };
 
   UI.textToolbars[8].getElementsByTagName("input")[0].onkeyup = function(e) {
@@ -340,10 +342,10 @@
     this.value = this.value.replace(/[^0-9]/g, '');
     if (parseInt(this.value) > 70) {
       this.value = 70;
-    };
+    }
     if (this.value === "") {
       this.value = 0;
-    };
+    }
     this.value = parseInt(this.value);
     var selectedElement = null;
     for (var i = 0; i < slidesArray.length; i++) {
@@ -351,16 +353,16 @@
       for (var elem in slide.content) {
         if (slide.content[elem].tagObj.selected) {
           selectedElement = slide.content[elem].tagObj;
-        };
-      };
-    };
+        }
+      }
+    }
 
     if (e.keyCode === 13) {
       if (selectedElement) {
         selectedElement.element.style.fontSize = this.value + "px";
         selectedElement.setStyle("font-size", this.value + "px");
-      };
-    };
+      }
+    }
   };
 
   Toolbar.canvas.onmousedown = function(e) {
@@ -375,16 +377,16 @@
       for (var elem in slide.content) {
         if (slide.content[elem].tagObj.selected) {
           selectedElement = slide.content[elem].tagObj;
-        };
-      };
-    };
+        }
+      }
+    }
 
     if(selectedElement) {
       selectedElement.element.style.color = UI.textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color;
       selectedElement.setStyle("color", UI.textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color);
     }
 
-  }
+  };
 
   Toolbar.bgCanvas.onmousedown = function(e) {
     var posX = e.clientX - this.getBoundingClientRect().left;
@@ -398,16 +400,16 @@
       for (var elem in slide.content) {
         if (slide.content[elem].tagObj.selected) {
           selectedElement = slide.content[elem].tagObj;
-        };
-      };
-    };
+        }
+      }
+    }
 
     if(selectedElement) {
       selectedElement.element.style.background = UI.textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color;
       selectedElement.setStyle("background", UI.textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color);
     }
 
-  }
+  };
 
   var fullscreenHandler = function() {
     console.log(presentationMode);
@@ -417,7 +419,7 @@
       UI.exitPresentation();
     } else {
       presentationMode = true;
-    };
+    }
   };
 
   document.addEventListener('webkitfullscreenchange', fullscreenHandler, false);
@@ -457,9 +459,9 @@
           //selectedElement = slide.content[el].tagObj;
           slide.content[el].tagObj.element.parentElement.removeChild(slide.content[el].tagObj.element);
           delete slide.content[slide.content[el].tagObj.index];
-        };
-      };
-    };
+        }
+      }
+    }
 
   };
 
@@ -473,9 +475,9 @@
       for (var el in slide.content) {
         if (slide.content[el].tagObj.selected) {
           selectedElement = slide.content[el].tagObj;
-        };
-      };
-    };
+        }
+      }
+    }
 
     selectedElementAspectRatio = Utils.getStyle(selectedElement.element, "width") / Utils.getStyle(selectedElement.element, "height");
     //console.log(selectedElementAspectRatio);
@@ -491,9 +493,9 @@
       for (var el in slide.content) {
         if (slide.content[el].tagObj.selected) {
           selectedElement = slide.content[el].tagObj;
-        };
-      };
-    };
+        }
+      }
+    }
 
     if (anchorSelected) {
       //console.log(selectedElement);
@@ -511,7 +513,7 @@
       selectedElement.setStyle("height", selectedElement.element.style.height);
 
       UI.setDeleteElementPosition(selectedElement.element);
-    };
+    }
   };
 
   document.onmouseup = function() {
@@ -524,13 +526,13 @@
       for (var el in slide.content) {
         if (slide.content[el].tagObj.selected) {
           selectedCount++;
-        };
-      };
-    };
+        }
+      }
+    }
 
     if (selectedCount === 0) {
       UI.resizeAnchor.style.display = "none";
       UI.deleteElement.style.display = "none";
-    };
+    }
   };
 })();
