@@ -20,20 +20,20 @@ var Toolbar = (function() {
   this.createNewText = function(string, posX, posY) {
     console.log("Create New Text Box")
     var text = new Tag("div", string, {x: posX, y: posY});
-    text.setStyle("text-align", "left");
-    text.setStyle("font-size", UI.textToolbars[8].getElementsByTagName("input")[0].value + "px");
-    text.setStyle("color", UI.textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color);
-    text.setAttribute("contenteditable", true);
+    TagOperation.setStyle(text, "text-align", "left");
+    TagOperation.setStyle(text, "font-size", UI.textToolbars[8].getElementsByTagName("input")[0].value + "px");
+    TagOperation.setStyle(text, "color", UI.textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color);
+    TagOperation.setAttribute(text, "contenteditable", true);
     return text;
   };
 
   this.createNewImage = function(src, posX, posY) {
-    console.log("Create New Image Image")
+    console.log("Create New Image")
     var img = new Tag("img", "", {x: posX, y: posY});
-    img.setStyle("padding", "5px");
-    img.setStyle("text-align", "left");
-    img.setAttribute("draggable", "false");
-    img.setAttribute("src", src);
+    TagOperation.setStyle(img, "padding", "5px");
+    TagOperation.setStyle(img, "text-align", "left");
+    TagOperation.setAttribute(img, "draggable", "false");
+    TagOperation.setAttribute(img, "src", src);
     return img;
   };
 

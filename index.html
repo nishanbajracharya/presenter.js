@@ -74,6 +74,7 @@
       </div>
     </div>
     <div class="header-right">
+      <button class="header-save-btn"><i class="fa fa-save" aria-hidden="true"></i> Save</button>
       <button class="header-new-slide-btn"><i class="fa fa-file-text-o" aria-hidden="true"></i> New Slide</button>
       <button class="header-play-btn"><i class="fa fa-play" aria-hidden="true"></i> Play</button>
     </div>
@@ -98,7 +99,23 @@
       <!--<li title="Shape" class="toolbar-shape"><i class="fa fa-plus-circle" aria-hidden="true"></i></li>-->
     </ul>
   </div>
+  <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCvRkpBoi-BLJJryGV_pncjJ-FCojzfKL4",
+      authDomain: "presenterjs-f1ce2.firebaseapp.com",
+      databaseURL: "https://presenterjs-f1ce2.firebaseio.com",
+      storageBucket: "presenterjs-f1ce2.appspot.com",
+      messagingSenderId: "793206899794"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+
+  <script src="js/Preload.js"></script>
   <script src="js/Utils.js"></script>
+  <script src="js/TagOperation.js"></script>
   <script src="js/UI.js"></script>
   <script src="js/Tag.js"></script>
   <script src="js/Toolbar.js"></script>

@@ -36,26 +36,8 @@ var Tag = function(tag, value, position, attributes, styles) {
   this.selected = false;
 
   this.index = Utils.generateIndex(8, false);
-  this.props = {
-    tag: this.tag,
-  };
 
-  this.updateProps = function() {
-    this.props.value = this.value;
-    this.props.position = this.position;
-    this.props.styles = this.styles;
-    this.props.attributes = this.attributes;
-  };
-
-  this.getProps = function() {
-    this.updateProps();
-    return this.props;
-  };
-
-  this.setProps = function(key, value) {
-    this.props[key] = value;
-  };
-
+  /*
   this.setStyle = function(key, value) {
     this.styles[key] = value;
   };
@@ -66,7 +48,6 @@ var Tag = function(tag, value, position, attributes, styles) {
 
   this.setValue = function(string) {
     this.value = string;
-    //console.log(this.value);
   };
 
   this.initMove = function(container){
@@ -74,7 +55,6 @@ var Tag = function(tag, value, position, attributes, styles) {
     var posX = 0;
     var posY = 0;
     var movingElementFlag = false;
-    //var containerPosition = container.getBoundingClientRect();
 
     that.element.addEventListener("mousedown", function(e) {
       posX = e.clientX - that.element.getBoundingClientRect().left + document.documentElement.scrollLeft;
@@ -89,7 +69,6 @@ var Tag = function(tag, value, position, attributes, styles) {
           x: that.element.getBoundingClientRect().left - that.element.parentElement.getBoundingClientRect().left,
           y: that.element.getBoundingClientRect().top  - that.element.parentElement.getBoundingClientRect().top
         };
-        //console.log(that, that.position);
       }
       movingElementFlag = false;
     });
@@ -100,7 +79,6 @@ var Tag = function(tag, value, position, attributes, styles) {
           x: that.element.parentElement.getBoundingClientRect().left + document.documentElement.scrollLeft,
           y: that.element.parentElement.getBoundingClientRect().top + document.documentElement.scrollTop
         };
-        //console.log(that.element.parentElement, parentContainerPosition);
         document.body.style.cursor = "move";
         that.element.style.left = (e.clientX - parentContainerPosition.x - posX) + "px";
         that.element.style.top = (e.clientY - parentContainerPosition.y - posY) + "px";
@@ -108,6 +86,6 @@ var Tag = function(tag, value, position, attributes, styles) {
         UI.setDeleteElementPosition(that.element);
       }
     });
-
   };
+  */
 };
