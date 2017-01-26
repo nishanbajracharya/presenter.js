@@ -411,6 +411,24 @@
 
   };
 
+  UI.textToolbars[10].getElementsByClassName("font-bg-clear-btn")[0].onmousedown = function() {
+    var selectedElement = null;
+    for (var i = 0; i < slidesArray.length; i++) {
+      var slide = slidesArray[i];
+      for (var elem in slide.content) {
+        if (slide.content[elem].tagObj.selected) {
+          selectedElement = slide.content[elem].tagObj;
+        }
+      }
+    }
+
+    if(selectedElement) {
+      selectedElement.element.style.background = "none";
+      selectedElement.setStyle("background", "none");
+      UI.textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color = "#444";
+    }
+  };
+
   var fullscreenHandler = function() {
     console.log(presentationMode);
     index = 0;

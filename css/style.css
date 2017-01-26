@@ -124,7 +124,7 @@
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
   background: #fff;
   width: 222px;
-  z-index: 40;
+  z-index: 200;
   display: none;
 }
 
@@ -137,7 +137,7 @@
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
   background: #fff;
   width: 222px;
-  z-index: 40;
+  z-index: 200;
   display: none;
 }
 
