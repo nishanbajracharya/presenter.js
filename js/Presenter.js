@@ -32,7 +32,7 @@
 
     clearSelectedElement();
   });
-  
+
   /*var slide = new Slide(0);
   slidesArray.push(slide);
   UI.createSlide(slide);
@@ -48,15 +48,20 @@
   var getSlidesContent = function() {
     var content = {};
     for (var i = 0; i < slidesArray.length; i++) {
+      for(var elem in slidesArray[i].content) {
+        var tag = slidesArray[i].content[elem];
+        if(tag.file) {
+        }
+      }
       content[i] = slidesArray[i].content;
     }
     Preload.putData(content);
   };
 
   UI.saveBtn.onclick = function() {
-    console.log(slidesArray);
+    //console.log(slidesArray);
     getSlidesContent();
-    console.log(slidesArray);
+    //console.log(slidesArray);
   };
 
   document.onkeydown = function(e) {
@@ -65,7 +70,7 @@
     }else {
       shiftKeyPressed = false;
     }
-    console.log(slidesArray);
+    //console.log(slidesArray);
   };
 
   UI.playBtn.onclick = function() {
@@ -348,13 +353,24 @@
   };
 
   UI.toolbar.getElementsByClassName("toolbar-img-input")[0].onchange = function(e) {
-    var path = (window.URL || window.webkitURL).createObjectURL(this.files[0]);
+    var file = this.files[0];
+    //var path = (window.URL || window.webkitURL).createObjectURL(file);
+
     var slideIndex = UI.getCurrentSlideIndex();
     var pos = UI.getRelativePosition(slidesArray, e);
-    slidesArray[slideIndex].addElement(Toolbar.createNewImage(path, pos.posX, pos.posY));
 
-    UI.updateSlide(slidesArray, slideIndex);
-    this.files[0] = null;
+    var reader  = new FileReader();
+
+    reader.addEventListener("load", function () {
+      //console.log(reader.result);
+      slidesArray[slideIndex].addElement(Toolbar.createNewImage(reader.result.toString(), 0, 0));
+
+      UI.updateSlide(slidesArray, slideIndex);
+    }, false);
+
+
+    reader.readAsDataURL(file);
+    //console.log(this.files[0], path);
   };
 
   UI.deleteElement.onmousedown = function(e) {
