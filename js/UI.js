@@ -202,14 +202,20 @@ var UI = (function() {
   };
 
   var setResizeAnchorPosition = function(elem) {
-    resizeAnchor.style.left = (Utils.getStyle(elem, "left") + Utils.getStyle(elem, "width") + Utils.getStyle(elem.parentElement, "margin-left") - 4) + "px";
-    resizeAnchor.style.top = (Utils.getStyle(elem, "top") + Utils.getStyle(elem, "height") + Utils.getStyle(elem.parentElement, "margin-top") + 10) + "px";
+    //resizeAnchor.style.left = (Utils.getStyle(elem, "left") + Utils.getStyle(elem, "width") + elem.parentElement.getBoundingClientRect().left - 4) + "px";
+    //resizeAnchor.style.top = (Utils.getStyle(elem, "top") + Utils.getStyle(elem, "height") + elem.parentElement.getBoundingClientRect().top + 10) + "px";
+
+    resizeAnchor.style.left = (elem.offsetLeft + Utils.getStyle(elem, "width") + slideBody.offsetLeft / 2 + 12) + "px";
+    resizeAnchor.style.top = (elem.offsetTop + Utils.getStyle(elem, "height") + 10) + "px";
     resizeAnchor.style.display = "block";
   };
 
   var setDeleteElementPosition = function(elem) {
-    deleteElement.style.left = (Utils.getStyle(elem, "left") + Utils.getStyle(elem, "width") + Utils.getStyle(elem.parentElement, "margin-left") - 8) + "px";
-    deleteElement.style.top = (Utils.getStyle(elem, "top") + Utils.getStyle(elem.parentElement, "margin-top") + 4) + "px";
+    //deleteElement.style.left = (Utils.getStyle(elem, "left") + Utils.getStyle(elem, "width") + Utils.getStyle(elem.parentElement, "margin-left") - 8) + "px";
+    //deleteElement.style.top = (Utils.getStyle(elem, "top") + Utils.getStyle(elem.parentElement, "margin-top") + 4) + "px";
+
+    deleteElement.style.left = (elem.offsetLeft + Utils.getStyle(elem, "width") + slideBody.offsetLeft / 2 + 8) + "px";
+    deleteElement.style.top = (elem.offsetTop + 4) + "px";
     deleteElement.style.display = "block";
   };
 
