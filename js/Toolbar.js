@@ -42,6 +42,18 @@ var Toolbar = (function() {
     return img;
   };
 
+  this.createNewList = function(string, posX, posY) {
+    console.log("Create New List")
+    var list = new Tag("div", "<li>" + string + "</li>", {x: posX, y: posY});
+
+    TagOperation.setStyle(list, "padding", "10px");
+    TagOperation.setStyle(list, "text-align", "left");
+    TagOperation.setStyle(list, "width", "calc(50% - 10px)");
+    TagOperation.setAttribute(list, "contenteditable", true);
+    TagOperation.setAttribute(list, "class", "list-elements");
+    return list;
+  };
+
   var canvas = document.getElementsByClassName("color-bar")[0];
   var ctx = canvas.getContext('2d');
 
@@ -64,6 +76,7 @@ var Toolbar = (function() {
     show: this.show,
     hide: this.hide,
     createNewText: this.createNewText,
-    createNewImage: this.createNewImage
+    createNewImage: this.createNewImage,
+    createNewList: this.createNewList
   };
 })();

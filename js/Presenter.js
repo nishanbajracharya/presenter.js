@@ -73,7 +73,21 @@
     }else {
       shiftKeyPressed = false;
     }
-    //console.log(slidesArray);
+    
+    if (e.keyCode === 13 && !e.shiftKey) {
+      if(e.target.getAttribute("contenteditable") === "true") {
+        e.preventDefault();
+        if(e.target.classList.contains("list-elements")){
+          document.execCommand("insertHTML", false, "<br><br>");
+          document.execCommand("insertHTML", false, "<li></li>");
+        }else {
+          //document.execCommand("insertUnorderedList", false);
+          document.execCommand("insertHTML", false, "<br><br>");
+          //document.execCommand("insertUnorderedList");
+        }
+        //document.execCommand("bold", false);
+      }
+    }
   };
 
   UI.playBtn.onclick = function() {
@@ -103,7 +117,7 @@
           UI.setDeleteElementPosition(slide.content[el].element);
 
           slide.content[el].selected = true;
-          console.log(elem)
+          //console.log(elem)
           elem.style.outline = "1px solid #49c";
           UI.setTextToolbarProps(elem);
           selectedElement = slide.content[el];
@@ -313,11 +327,11 @@
     var posX = e.clientX - this.getBoundingClientRect().left;
     var posY = e.clientY - this.getBoundingClientRect().top;
     var imgData = Toolbar.bgCanvasContext.getImageData(posX, posY, 1, 1);
-    UI.textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color = "rgb(" + imgData.data[0] + "," + imgData.data[1] + "," + imgData.data[2] + ")";
+    UI.textToolbars[10].style.background = "rgb(" + imgData.data[0] + "," + imgData.data[1] + "," + imgData.data[2] + ")";
 
     if(selectedElement) {
-      selectedElement.element.style.background = UI.textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color;
-      TagOperation.setStyle(selectedElement, "background", UI.textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color);
+      selectedElement.element.style.background = UI.textToolbars[10].style.background;
+      TagOperation.setStyle(selectedElement, "background", UI.textToolbars[10].style.background);
     }
 
   };
@@ -327,8 +341,8 @@
     if(selectedElement) {
       selectedElement.element.style.background = "none";
       TagOperation.setStyle(selectedElement, "background", "none");
-      UI.textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color = "#444";
     }
+    UI.textToolbars[10].style.background = "none";
   };
 
   var fullscreenHandler = function() {
@@ -373,6 +387,15 @@
     reader.readAsDataURL(file);
   };
 
+  UI.toolbar.getElementsByClassName("toolbar-list")[0].onclick = function(e) {
+    var slideIndex = UI.getCurrentSlideIndex();
+    var pos = UI.getRelativePosition(slidesArray, e);
+    slidesArray[slideIndex].addElement(Toolbar.createNewList("List Item", pos.posX, pos.posY));
+
+    UI.updateSlide(slidesArray, slideIndex);
+  };
+
+  // Delete Element
   UI.deleteElement.onmousedown = function(e) {
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
@@ -389,6 +412,7 @@
     anchorSelected = true;
 
     selectedElementAspectRatio = Utils.getStyle(selectedElement.element, "width") / Utils.getStyle(selectedElement.element, "height");
+    console.log(selectedElement.element);
   };
 
   document.onmousemove = function(e) {

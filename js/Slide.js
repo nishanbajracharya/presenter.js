@@ -16,7 +16,7 @@ var Slide = function(index) {
   this.updateElements = function() {
     for(var elem in this.content) {
       if(this.content[elem].element !== null) {
-        TagOperation.setValue(this.content[elem], this.content[elem].element.innerText);
+        TagOperation.setValue(this.content[elem], this.content[elem].element.innerHTML);
       }
     }
   };

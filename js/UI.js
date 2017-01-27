@@ -1,24 +1,26 @@
 var UI = (function() {
   console.log("UI");
 
-  document.onkeydown = function(evt) {
+  /*document.onkeydown = function(evt) {
     evt = evt || window.event;
     if (evt.keyCode === 13 && !evt.shiftKey) {
       if(evt.target.getAttribute("contenteditable") === "true") {
         evt.preventDefault();
-        var caretPosition = window.getSelection().getRangeAt(0).startOffset;
+        //var caretPosition = window.getSelection().getRangeAt(0).startOffset;
         //console.log(caretPosition);
-        evt.target.innerHTML += "<br/><br/>";
-        var range = document.createRange();
+        //evt.target.innerHTML += "<br/><br/>";
+        console.log("Enter");
+        document.execCommand("insertHTML", false, "<br><br>");
+        //var range = document.createRange();
         //console.log(evt.target.childNodes);
 
-        range.setStart(evt.target.firstChild, caretPosition);
-        range.setEnd(evt.target.firstChild, caretPosition);
-        window.getSelection().removeAllRanges();
-        window.getSelection().addRange(range);
+        //range.setStart(evt.target.firstChild, caretPosition);
+        //range.setEnd(evt.target.firstChild, caretPosition);
+        //window.getSelection().removeAllRanges();
+        //window.getSelection().addRange(range);
       }
     }
-  };
+  };*/
 
   var that = this;
 
@@ -64,7 +66,7 @@ var UI = (function() {
       slide.content[elem].element = e;
       TagOperation.initMove(slide.content[elem], slideElement);
       if (slide.content[elem].value) {
-        e.innerText = slide.content[elem].value;
+        e.innerHTML = slide.content[elem].value;
       }
 
       for (var attribute in slide.content[elem].attributes) {
@@ -113,7 +115,7 @@ var UI = (function() {
       slide.content[elem].element = e;
       TagOperation.initMove(slide.content[elem], slideElement);
       if (slide.content[elem].value) {
-        e.innerText = slide.content[elem].value;
+        e.innerHTML = slide.content[elem].value;
       }
 
       for (var attribute in slide.content[elem].attributes) {
@@ -198,7 +200,7 @@ var UI = (function() {
     }
     textToolbars[8].getElementsByTagName("input")[0].value = Utils.getStyle(elem, "font-size");
     textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color = elem.style.color;
-    textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color = elem.style.background;
+    textToolbars[10].style.background = elem.style.background;
   };
 
   var setResizeAnchorPosition = function(elem) {
