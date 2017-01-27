@@ -224,6 +224,7 @@
 
 .thumbnail-content .list-elements li {
   position: relative;
+  font-family: inherit;
 }
 
 .slide-list-icon.active .thumbnail{
@@ -272,6 +273,7 @@
   width: auto;
   position: relative;
   float: none;
+  font-family: inherit;
 }
 
 .slides-editor .slide-notes {
@@ -325,6 +327,8 @@
 
 .presentation-slide li {
   position: relative;
+  font-family: inherit;
+  color: inherit;
 }
 
 .presentation-slide .list-elements {
