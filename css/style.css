@@ -315,7 +315,7 @@
   overflow:hidden;
 }
 
-.presentation-slide div, img {
+.presentation-slide div, .presentation-slide img {
   box-sizing: border-box;
   padding: 10px;
   pointer-events: none;
