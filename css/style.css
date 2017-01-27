@@ -216,6 +216,16 @@
   pointer-events: none;
 }
 
+.thumbnail-content .list-elements {
+  list-style: disc;
+  width: auto;
+  list-style-position: inside;
+}
+
+.thumbnail-content .list-elements li {
+  position: relative;
+}
+
 .slide-list-icon.active .thumbnail{
   border: 2px solid #49c;
 }
@@ -303,7 +313,7 @@
   overflow:hidden;
 }
 
-.presentation-slide * {
+.presentation-slide div, img {
   box-sizing: border-box;
   padding: 10px;
   pointer-events: none;
@@ -311,6 +321,16 @@
 
 .presentation-slide img {
   padding: 5px;
+}
+
+.presentation-slide li {
+  position: relative;
+}
+
+.presentation-slide .list-elements {
+  width: auto;
+  list-style: disc;
+  list-style-position: inside;
 }
 
 /* Toolbar */
