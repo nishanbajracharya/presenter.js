@@ -252,6 +252,18 @@
   -moz-user-select: none;
 }
 
+.slide-body .slide .list-elements {
+  list-style: disc;
+  list-style-position: inside;
+  width: auto;
+}
+
+.slide-body .slide li {
+  width: auto;
+  position: relative;
+  float: none;
+}
+
 .slides-editor .slide-notes {
   box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
   border-top: 1px solid #fff;
