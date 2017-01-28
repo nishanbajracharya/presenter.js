@@ -1,5 +1,5 @@
 var Toolbar = (function() {
-  console.log("Toolbar");
+  //console.log("Toolbar");
 
   var that = this;
 

@@ -1,5 +1,5 @@
 var Slide = function(index) {
-  console.log("Slide");
+  //console.log("Slide");
 
   var that = this;
 
@@ -7,8 +7,11 @@ var Slide = function(index) {
     index = 0;
   }
 
+  //console.log(index);
+
   this.iconElement = null;
   this.element = null;
+  this.deleteBtn = null;
   this.index = index;
 
   this.content = {};

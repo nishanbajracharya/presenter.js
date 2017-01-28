@@ -1,5 +1,5 @@
 (function() {
-  console.log("presenter.js");
+  //console.log("presenter.js");
 
   var presentationMode = false;
 
@@ -13,10 +13,33 @@
   var shiftKeyPressed = false;
 
   Preload.getData(function(data) {
-    var i = 0;
-    for(var slideContent in data) {
-      var slide = new Slide(i);
-      slide.content = data[slideContent];
+    if(data) {
+      var i = 0;
+      for(var slideContent in data) {
+        var slide = new Slide(i);
+        slide.content = data[slideContent];
+        slidesArray.push(slide);
+        UI.createSlide(slide);
+
+        slide.iconElement.onclick = (function(i) {
+          return function() {
+            UI.viewSlide(slidesArray, i);
+          };
+        })(i);
+
+        slide.deleteBtn.onclick = (function(i) {
+          return function() {
+            UI.deleteSlide(slidesArray, i);
+          }
+        })(i);
+        i++;
+      }
+      i = 0;
+      UI.viewSlide(slidesArray, 0);
+
+      clearSelectedElement();
+    }else {
+      var slide = new Slide(0);
       slidesArray.push(slide);
       UI.createSlide(slide);
 
@@ -24,14 +47,10 @@
         return function() {
           UI.viewSlide(slidesArray, i);
         };
-      })(i);
-      i++;
+      })(0);
+
+      UI.viewSlide(slidesArray, 0);
     }
-    i = 0;
-    UI.viewSlide(slidesArray, 0);
-
-    clearSelectedElement();
-
     document.getElementsByClassName("loading-gif")[0].style.display = "none";
     document.getElementsByClassName("header-right")[0].style.display = "block";
   });
@@ -48,7 +67,7 @@
 
   UI.viewSlide(slidesArray, 0);*/
 
-  var getSlidesContent = function() {
+  var saveSlidesContent = function() {
     var content = {};
     for (var i = 0; i < slidesArray.length; i++) {
       for(var elem in slidesArray[i].content) {
@@ -63,7 +82,7 @@
 
   UI.saveBtn.onclick = function() {
     //console.log(slidesArray);
-    getSlidesContent();
+    saveSlidesContent();
     //console.log(slidesArray);
   };
 
@@ -186,8 +205,14 @@
       }
     }
     if (e.which === 3) {
-      Toolbar.show(e);
-    } else {
+      console.log(UI.slideBody.childNodes, e.target);
+      var slideBodyNodesArray = [].map.call(UI.slideBody.children ,function(res) {
+        return res;
+      });
+      if(slideBodyNodesArray.indexOf(e.target) > -1){
+        Toolbar.show(e);
+      }
+    }else {
       Toolbar.hide();
     }
   });
@@ -454,7 +479,9 @@
     if (selectedCount === 0) {
       UI.resizeAnchor.style.display = "none";
       UI.deleteElement.style.display = "none";
-      UI.updateSlide(slidesArray, UI.getCurrentSlideIndex());
+      if(slidesArray.length > 0) {
+        UI.updateSlide(slidesArray, UI.getCurrentSlideIndex());
+      }
     }
   };
 })();

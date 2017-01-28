@@ -187,12 +187,28 @@
 }
 
 .slides-list .slide-list-icon {
+  position: relative;
   padding: 20px 20px 20px 16px;
   cursor: pointer;
 }
 
 .slides-list .slide-list-icon:hover {
   background: #ccc;
+}
+
+.slide-list-icon .delete-slide-btn {
+  display: none;
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  color: #a22;
+  padding: 0 1px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.slide-list-icon:hover .delete-slide-btn {
+  display: block;
 }
 
 .slide-list-icon .thumbnail {
