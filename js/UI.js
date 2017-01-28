@@ -9,6 +9,7 @@ var UI = (function() {
   var currentSlideIndex = 0;
 
   var toolbar = document.getElementsByClassName("toolbar")[0];
+  var headerItems = document.getElementsByClassName("toolbar-elements")[0];
   var textToolbars = document.getElementsByClassName("header-toolbar-icon");
   var playBtn = document.getElementsByClassName("header-play-btn")[0];
   var newSlideBtn = document.getElementsByClassName("header-new-slide-btn")[0];
@@ -284,6 +285,7 @@ var UI = (function() {
     resizeAnchor: resizeAnchor,
     deleteElement: deleteElement,
     toolbar: toolbar,
+    headerItems: headerItems,
     headerToolbar: headerToolbar,
 
     // Builder Mode Methods

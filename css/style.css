@@ -47,6 +47,31 @@
   position: relative;
 }
 
+.header-toolbar .toolbar-elements {
+  float: left;
+  margin-right: 20px;
+}
+
+.header-toolbar .toolbar-properties {
+  float: right;
+}
+
+.toolbar-elements ul li:nth-child(2) {
+  padding: 5px;
+  overflow: hidden;
+}
+
+.toolbar-elements ul li input[type="file"] {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  padding: 10px;
+  top: 0px;
+  left: 0px;
+  outline: none;
+  opacity: 0;
+}
+
 .header-toolbar ul li:hover {
   background: rgba(0,0,0,0.2);
 }

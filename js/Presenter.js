@@ -387,6 +387,38 @@
   document.addEventListener('MSFullscreenChange', fullscreenHandler, false);
 
   //Create New Elements
+  //Header
+  UI.headerItems.getElementsByClassName("toolbar-text")[0].onclick = function(e) {
+    var slideIndex = UI.getCurrentSlideIndex();
+    slidesArray[slideIndex].addElement(Toolbar.createNewText("New Text", 0, 0));
+
+    UI.updateSlide(slidesArray, slideIndex);
+  };
+
+  UI.headerItems.getElementsByClassName("toolbar-img-input")[0].onchange = function(e) {
+    var file = this.files[0];
+
+    var slideIndex = UI.getCurrentSlideIndex();
+
+    var reader  = new FileReader();
+
+    reader.addEventListener("load", function () {
+      slidesArray[slideIndex].addElement(Toolbar.createNewImage(reader.result.toString(), 0, 0));
+
+      UI.updateSlide(slidesArray, slideIndex);
+    }, false);
+
+    reader.readAsDataURL(file);
+  };
+
+  UI.headerItems.getElementsByClassName("toolbar-list")[0].onclick = function(e) {
+    var slideIndex = UI.getCurrentSlideIndex();
+    slidesArray[slideIndex].addElement(Toolbar.createNewList("List Item", 0, 0));
+
+    UI.updateSlide(slidesArray, slideIndex);
+  };
+
+  //Right Click
   UI.toolbar.getElementsByClassName("toolbar-text")[0].onclick = function(e) {
     var slideIndex = UI.getCurrentSlideIndex();
     var pos = UI.getRelativePosition(slidesArray, e);

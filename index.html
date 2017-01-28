@@ -30,47 +30,56 @@
     <div class="header-left clear-fix">
       <a href="https://nishan13.github.io/presenter.js/" class="header-logo"><h1>presenter.js</h1></a>
       <div class="header-toolbar clear-fix">
-        <ul>
-          <li title="Bold" class="text-bold header-toolbar-icon"><i class="fa fa-bold"></i></li>
-          <li title="Italic" class="text-italic header-toolbar-icon"><i class="fa fa-italic"></i></li>
-          <li title="Underline" class="text-underline header-toolbar-icon"><i class="fa fa-underline"></i></li>
-          <li title="Align Left" class="text-align-left header-toolbar-icon"><i class="fa fa-align-left"></i></li>
-          <li title="Align Center" class="text-align-center header-toolbar-icon"><i class="fa fa-align-center"></i></li>
-          <li title="Align Right" class="text-align-right header-toolbar-icon"><i class="fa fa-align-right"></i></li>
-          <li title="Align Justify" class="text-align-justify header-toolbar-icon"><i class="fa fa-align-justify"></i></li>
-          <li class="text-font header-toolbar-icon"><span class="font-name">Font</span>
-            <ul class="font-list">
-              <li data-name="Arial" class="font-list-name">Arial</li>
-              <li data-name="Comic Sans MS" class="font-list-name">Comic Sans</li>
-              <li data-name="Courier New" class="font-list-name">Courier New</li>
-              <li data-name="Garamond" class="font-list-name">Garamond</li>
-              <li data-name="Georgia" class="font-list-name">Georgia</li>
-              <li data-name="Impact" class="font-list-name">Impact</li>
-              <li data-name="Roboto" class="font-list-name">Roboto</li>
-              <li data-name="Times New Roman" class="font-list-name">Times New Roman</li>
-              <li data-name="Trebuchet MS" class="font-list-name">Trebuchet</li>
-              <li data-name="sans-serif" class="font-list-name barrier">Sans Serif</li>
-              <li data-name="serif" class="font-list-name">Serif</li>
-              <li data-name="monospace" class="font-list-name">monospace</li>
-            </ul>
-          </li>
-          <li title="Font Size" class="text-font-size header-toolbar-icon"><input type="text" value="16"></li>
-          <li class="text-color header-toolbar-icon">
-            <i class="fa fa-pencil"></i>
-            <div class="color-picker">
-              <p>Pick font color</p>
-              <canvas width="200" height="200" class="color-bar"></canvas>
-            </div>
-          </li>
-          <li class="text-bg-color header-toolbar-icon">
-            <i class="fa fa-paint-brush"></i>
-            <div class="color-picker">
-              <p>Pick font background color</p>
-              <canvas width="200" height="200" class="color-bar"></canvas>
-              <button class="font-bg-clear-btn">Clear</button>
-            </div>
-          </li>
-        </ul>
+        <div class="toolbar-elements">
+          <ul>
+            <li title="Create Text" class="toolbar-text"><i class="fa fa-font" aria-hidden="true"></i></li>
+            <li title="Create Image" class="toolbar-image"><input class="toolbar-img-input" type="file"  accept="image/gif, image/jpeg, image/png" /><i class="fa fa-picture-o" aria-hidden="true"></i></li>
+            <li title="Create List" class="toolbar-list"><i class="fa fa-list-ul" aria-hidden="true"></i></li>
+          </ul>
+        </div>
+        <div class="toolbar-properties">
+          <ul>
+            <li title="Bold" class="text-bold header-toolbar-icon"><i class="fa fa-bold"></i></li>
+            <li title="Italic" class="text-italic header-toolbar-icon"><i class="fa fa-italic"></i></li>
+            <li title="Underline" class="text-underline header-toolbar-icon"><i class="fa fa-underline"></i></li>
+            <li title="Align Left" class="text-align-left header-toolbar-icon"><i class="fa fa-align-left"></i></li>
+            <li title="Align Center" class="text-align-center header-toolbar-icon"><i class="fa fa-align-center"></i></li>
+            <li title="Align Right" class="text-align-right header-toolbar-icon"><i class="fa fa-align-right"></i></li>
+            <li title="Align Justify" class="text-align-justify header-toolbar-icon"><i class="fa fa-align-justify"></i></li>
+            <li class="text-font header-toolbar-icon"><span class="font-name">Font</span>
+              <ul class="font-list">
+                <li data-name="Arial" class="font-list-name">Arial</li>
+                <li data-name="Comic Sans MS" class="font-list-name">Comic Sans</li>
+                <li data-name="Courier New" class="font-list-name">Courier New</li>
+                <li data-name="Garamond" class="font-list-name">Garamond</li>
+                <li data-name="Georgia" class="font-list-name">Georgia</li>
+                <li data-name="Impact" class="font-list-name">Impact</li>
+                <li data-name="Roboto" class="font-list-name">Roboto</li>
+                <li data-name="Times New Roman" class="font-list-name">Times New Roman</li>
+                <li data-name="Trebuchet MS" class="font-list-name">Trebuchet</li>
+                <li data-name="sans-serif" class="font-list-name barrier">Sans Serif</li>
+                <li data-name="serif" class="font-list-name">Serif</li>
+                <li data-name="monospace" class="font-list-name">monospace</li>
+              </ul>
+            </li>
+            <li title="Font Size" class="text-font-size header-toolbar-icon"><input type="text" value="16"></li>
+            <li class="text-color header-toolbar-icon">
+              <i class="fa fa-pencil"></i>
+              <div class="color-picker">
+                <p>Pick font color</p>
+                <canvas width="200" height="200" class="color-bar"></canvas>
+              </div>
+            </li>
+            <li class="text-bg-color header-toolbar-icon">
+              <i class="fa fa-paint-brush"></i>
+              <div class="color-picker">
+                <p>Pick font background color</p>
+                <canvas width="200" height="200" class="color-bar"></canvas>
+                <button class="font-bg-clear-btn">Clear</button>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="header-right">
