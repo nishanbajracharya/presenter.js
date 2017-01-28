@@ -130,6 +130,7 @@
     for (var i = 0; i < slidesArray.length; i++) {
       slide = slidesArray[i];
       for (var el in slide.content) {
+        //console.log(i, slide.content[el].element, elem);
         if (slide.content[el].element === elem) {
 
           UI.setResizeAnchorPosition(slide.content[el].element);
@@ -139,6 +140,16 @@
           //console.log(elem)
           elem.style.outline = "1px solid #49c";
           UI.setTextToolbarProps(elem);
+          selectedElement = slide.content[el];
+        }
+        if(slide.content[el].element.contains(elem)) {
+          UI.setResizeAnchorPosition(slide.content[el].element);
+          UI.setDeleteElementPosition(slide.content[el].element);
+
+          slide.content[el].selected = true;
+          //console.log(elem)
+          slide.content[el].element.style.outline = "1px solid #49c";
+          UI.setTextToolbarProps(slide.content[el].element);
           selectedElement = slide.content[el];
         }
       }
@@ -192,7 +203,7 @@
       if (!UI.headerToolbar.contains(e.target)) {
         var slideContent = slidesArray[slide].content;
         for (var el in slideContent) {
-          if (slideContent[el].element === e.target) {
+          if (slideContent[el].element === e.target || slideContent[el].element.contains(e.target)) {
             selectedCount++;
             selectElement(e.target);
           }
