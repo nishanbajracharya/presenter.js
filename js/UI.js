@@ -1,26 +1,5 @@
 var UI = (function() {
-  console.log("UI");
-
-  /*document.onkeydown = function(evt) {
-    evt = evt || window.event;
-    if (evt.keyCode === 13 && !evt.shiftKey) {
-      if(evt.target.getAttribute("contenteditable") === "true") {
-        evt.preventDefault();
-        //var caretPosition = window.getSelection().getRangeAt(0).startOffset;
-        //console.log(caretPosition);
-        //evt.target.innerHTML += "<br/><br/>";
-        console.log("Enter");
-        document.execCommand("insertHTML", false, "<br><br>");
-        //var range = document.createRange();
-        //console.log(evt.target.childNodes);
-
-        //range.setStart(evt.target.firstChild, caretPosition);
-        //range.setEnd(evt.target.firstChild, caretPosition);
-        //window.getSelection().removeAllRanges();
-        //window.getSelection().addRange(range);
-      }
-    }
-  };*/
+  //console.log("UI");
 
   var that = this;
 
@@ -100,7 +79,8 @@ var UI = (function() {
     slide.thumbnail = slideListIcon;
     slideListIcon.setAttribute("class", "slide-list-icon");
     slideListIcon.setAttribute("index", slide.index);
-    slideListIcon.innerHTML = "<div class='thumbnail'><div class='thumbnail-content'>" + slide.element.innerHTML + "</div></div>";
+    slideListIcon.innerHTML = "<div class='delete-slide-btn'><i class='fa fa-times-circle'></i></div><div class='thumbnail'><div class='thumbnail-content'>" + slide.element.innerHTML + "</div></div>";
+    slide.deleteBtn = slideListIcon.getElementsByClassName("delete-slide-btn")[0];
 
     that.slidesList.appendChild(slideListIcon);
 
@@ -129,10 +109,19 @@ var UI = (function() {
       e.style.top = slide.content[elem].position.y + "px";
       e.style.left = slide.content[elem].position.x + "px";
       slideElement.appendChild(e);
-      slide.thumbnail.innerHTML = "<div class='thumbnail'><div class='thumbnail-content'>" + slide.element.innerHTML + "</div></div>";
+      slide.thumbnail.innerHTML = "<div class='delete-slide-btn'><i class='fa fa-times-circle'></i></div><div class='thumbnail'><div class='thumbnail-content'>" + slide.element.innerHTML + "</div></div>";
 
     }
   };
+
+  var deleteSlide = function(slideArray, index) {
+    //slidesList.removeChild(slideArray[index].iconElement);
+    //slideBody.removeChild(slideArray[index].element);
+    /*for(var i = index + 1; i < slideArray.length; i++) {
+      slideArray[i].index--;
+      slideArray[i].thumbnail.setAttribute("index", slideArray[i].index);
+    }*/
+  }
 
   var viewSlide = function(slideArray, index) {
     for (var i = 0; i < slideArray.length; i++) {
@@ -301,6 +290,7 @@ var UI = (function() {
     createSlide: createSlide,
     viewSlide: viewSlide,
     updateSlide: updateSlide,
+    deleteSlide: deleteSlide,
     getCurrentSlideIndex: getCurrentSlideIndex,
     getRelativePosition: getRelativePosition,
     setTextToolbarProps: setTextToolbarProps,
