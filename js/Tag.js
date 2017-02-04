@@ -35,6 +35,7 @@ var Tag = function(tag, value, position, attributes, styles) {
   this.toolbar = null;
   this.selected = false;
   this.movable = false;
+  this.zIndex = 1;
 
   this.index = Utils.generateIndex(8, false);
 

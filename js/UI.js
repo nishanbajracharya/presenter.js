@@ -45,6 +45,7 @@ var UI = (function() {
       var e = document.createElement(slide.content[elem].tag);
       slide.content[elem].element = e;
       TagOperation.initMove(slide.content[elem], slideElement);
+      TagOperation.setStyle(slide.content[elem], "z-index", slide.content[elem].zIndex);
       if (slide.content[elem].value) {
         e.innerHTML = slide.content[elem].value;
       }
@@ -102,6 +103,7 @@ var UI = (function() {
       var e = document.createElement(slide.content[elem].tag);
       slide.content[elem].element = e;
       TagOperation.initMove(slide.content[elem], slideElement);
+      TagOperation.setStyle(slide.content[elem], "z-index", slide.content[elem].zIndex);
       if (slide.content[elem].value) {
         e.innerHTML = slide.content[elem].value;
       }
