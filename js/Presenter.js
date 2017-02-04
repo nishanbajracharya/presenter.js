@@ -12,6 +12,8 @@
   var selectedElementAspectRatio = 1;
   var shiftKeyPressed = false;
 
+  var maxZIndex = 2;
+
   Preload.getData(function(data) {
     if(data) {
       var i = 0;
@@ -143,7 +145,8 @@
           slide.content[el].element.style.outline = "1px solid #49c";
           UI.setTextToolbarProps(slide.content[el].element);
           selectedElement = slide.content[el];
-
+          selectedElement.zIndex = maxZIndex++;
+          selectedElement.element.style.zIndex = selectedElement.zIndex;
         }
       }
     }
