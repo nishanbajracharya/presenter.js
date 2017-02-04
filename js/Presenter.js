@@ -534,6 +534,7 @@
 
   document.onmouseup = function() {
     anchorSelected = false;
+    shiftKeyPressed = false;
 
     for (var i = 0; i < slidesArray.length; i++) {
       var slide = slidesArray[i];
