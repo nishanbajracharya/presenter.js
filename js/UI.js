@@ -61,9 +61,10 @@ var UI = (function() {
       }
 
       if(slide.content[elem].tag === "video") {
-        slide.content[elem].element.innerHTML = "";
-        slide.content[elem].element.appendChild(slide.content[elem].videoSourceElement);
-        slide.content[elem].element.setAttribute("controls", "");
+        TagOperation.getVideoSrc(slide.content[elem]);
+        e.innerHTML = "";
+        e.appendChild(slide.content[elem].videoSourceElement);
+        e.setAttribute("controls", "");
       }
 
       for (var style in slide.content[elem].styles) {
