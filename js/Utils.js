@@ -1,5 +1,4 @@
 var Utils = (function() {
-  console.log("Utils");
   /**
    * Get a computed style of a DOM element
    * @param  {DOM Element} element The target DOM element
@@ -42,7 +41,7 @@ var Utils = (function() {
    * @param  {Boolean} special Flag to check whether to include special characters in generated index
    * @return {String}         A randomly generated index
    */
-  var generateIndex = function(length, special) {
+   var generateIndex = function(length, special) {
     var i = 0;
     var randomNumber;
     var character = "";
@@ -76,10 +75,31 @@ var Utils = (function() {
     return character;
   };
 
+  /**
+   * Get contrast color value of text for different background color
+   * @param  {String} color Background color of format rgb(r,g,b)
+   * @return {String}       "#333" or "#fff"
+   */
+  var getColorContrast = function(color) {
+    var rgb = /rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/.exec(color);
+    if(rgb === null) {
+      return "#333";
+    }
+    var contrast = (parseInt(rgb[1]) * 299 + parseInt(rgb[2]) * 587 + parseInt(rgb[3]) * 114) / 1000;
+    
+    console.log(color, rgb, contrast);
+
+    if(contrast > 128) {
+      return "#333";
+    }
+    return "#fff";
+  }
+
   return {
     getStyle: getStyle,
     getRandomNumber: getRandomNumber,
     getRandomColor: getRandomColor,
-    generateIndex: generateIndex
+    generateIndex: generateIndex,
+    getColorContrast: getColorContrast
   };
 })();

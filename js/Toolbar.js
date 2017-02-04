@@ -42,6 +42,19 @@ var Toolbar = (function() {
     return img;
   };
 
+  this.createNewVideo = function(fileData, posX, posY) {
+    console.log("Create New Video")
+    var video = new Tag("video", "", {x: posX, y: posY});
+
+    video.fileData = fileData;
+    TagOperation.setStyle(video, "padding", "5px");
+    TagOperation.setStyle(video, "text-align", "left");
+    TagOperation.setAttribute(video, "draggable", "false");
+    TagOperation.setStyle(video, "width", "calc(50% - 10px)");
+    TagOperation.getVideoSrc(video);
+    return video;
+  };
+
   this.createNewList = function(string, posX, posY) {
     console.log("Create New List")
     var list = new Tag("div", "<li>" + string + "</li>", {x: posX, y: posY});
@@ -77,6 +90,7 @@ var Toolbar = (function() {
     hide: this.hide,
     createNewText: this.createNewText,
     createNewImage: this.createNewImage,
-    createNewList: this.createNewList
+    createNewList: this.createNewList,
+    createNewVideo: this.createNewVideo
   };
 })();

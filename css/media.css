@@ -1,0 +1,11 @@
+@media only screen and (max-width: 640px) {
+  .header-left .header-logo{
+    display: none;
+  }
+  .header-toolbar {
+    margin-left: 0;
+  }
+  .header-toolbar .toolbar-elements {
+    margin-right: 0;
+  }
+}

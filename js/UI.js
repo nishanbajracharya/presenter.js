@@ -60,6 +60,12 @@ var UI = (function() {
         e.setAttribute(attribute, slide.content[elem].attributes.src);
       }
 
+      if(slide.content[elem].tag === "video") {
+        slide.content[elem].element.innerHTML = "";
+        slide.content[elem].element.appendChild(slide.content[elem].videoSourceElement);
+        slide.content[elem].element.setAttribute("controls", "");
+      }
+
       for (var style in slide.content[elem].styles) {
         e.style[style] = slide.content[elem].styles[style];
       }
@@ -105,6 +111,12 @@ var UI = (function() {
 
       for (var style in slide.content[elem].styles) {
         e.style[style] = slide.content[elem].styles[style];
+      }
+
+      if(slide.content[elem].tag === "video") {
+        e.innerHTML = "";
+        e.appendChild(slide.content[elem].videoSourceElement);
+        e.setAttribute("controls", "");
       }
 
       e.style.top = slide.content[elem].position.y + "px";
@@ -191,6 +203,9 @@ var UI = (function() {
     textToolbars[8].getElementsByTagName("input")[0].value = Utils.getStyle(elem, "font-size");
     textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color = elem.style.color;
     textToolbars[10].style.background = elem.style.background;
+
+
+    //textToolbars[10].getElementsByClassName("fa-paint-brush")[0].style.color = Utils.getColorContrast(elem.style.background);
   };
 
   var setResizeAnchorPosition = function(elem) {
