@@ -193,34 +193,52 @@
   });
 
   document.addEventListener("mouseup", function(e) {
-    selectedCount = 0;
-    for (var slide in slidesArray) {
-      slidesArray[slide].updateElements();
-      if (!UI.headerToolbar.contains(e.target)) {
-        var slideContent = slidesArray[slide].content;
-        for (var el in slideContent) {
-          if (slideContent[el].element === e.target || slideContent[el].element.contains(e.target)) {
-            selectedCount++;
-            selectElement(e.target);
+
+    if (presentationMode) {
+      if (e.which === 3) {
+        index--;
+        if (index < 0) {
+          index = 0;
+        }
+      }
+
+      if (e.which === 1) {
+        index++;
+        if (index > slidesArray.length - 1) {
+          index = slidesArray.length - 1;
+        }
+      }
+      UI.movePresentationSlide(index);
+    } else {
+      selectedCount = 0;
+      for (var slide in slidesArray) {
+        slidesArray[slide].updateElements();
+        if (!UI.headerToolbar.contains(e.target)) {
+          var slideContent = slidesArray[slide].content;
+          for (var el in slideContent) {
+            if (slideContent[el].element === e.target || slideContent[el].element.contains(e.target)) {
+              selectedCount++;
+              selectElement(e.target);
+            }
           }
         }
       }
-    }
-    if (selectedCount === 0) {
-      if (!UI.headerToolbar.contains(e.target)) {
-        clearSelectedElement();
+      if (selectedCount === 0) {
+        if (!UI.headerToolbar.contains(e.target)) {
+          clearSelectedElement();
+        }
       }
-    }
-    if (e.which === 3) {
-      console.log(UI.slideBody.childNodes, e.target);
-      var slideBodyNodesArray = [].map.call(UI.slideBody.children ,function(res) {
-        return res;
-      });
-      if(slideBodyNodesArray.indexOf(e.target) > -1){
-        Toolbar.show(e);
+      if (e.which === 3) {
+        console.log(UI.slideBody.childNodes, e.target);
+        var slideBodyNodesArray = [].map.call(UI.slideBody.children ,function(res) {
+          return res;
+        });
+        if(slideBodyNodesArray.indexOf(e.target) > -1){
+          Toolbar.show(e);
+        }
+      }else {
+        Toolbar.hide();
       }
-    }else {
-      Toolbar.hide();
     }
   });
 
