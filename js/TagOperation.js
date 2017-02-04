@@ -69,12 +69,35 @@ var TagOperation = (function() {
 
   };
 
+  this.getVideoSrc = function(tag) {
+    var fileData = tag.fileData;
+    var fileType = fileData.split(";")[0].substr(5);
+    var videoData = fileData.replace(/^data:video\/(mp4|webm);base64,/, '');
+
+    var byteCharacters = atob(videoData);
+    var byteNumbers = new Array(byteCharacters.length);
+    for (var i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    var byteArray = new Uint8Array(byteNumbers);
+
+    var blob = new Blob([byteArray], {type: fileType});
+    var path = (window.URL || window.webkitURL).createObjectURL(blob);
+
+    //tag.element.source = path;
+    tag.videoSourceElement = document.createElement('source');
+    tag.videoSourceElement.setAttribute('type', fileType);
+    tag.videoSourceElement.setAttribute('src', path);
+
+  };
+
   return {
     setStyle: this.setStyle,
     setAttribute: this.setAttribute,
     setValue: this.setValue,
     initMove: this.initMove,
-    getImageSrc: this.getImageSrc
+    getImageSrc: this.getImageSrc,
+    getVideoSrc: this.getVideoSrc
   };
 
 })();

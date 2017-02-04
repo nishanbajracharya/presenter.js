@@ -120,8 +120,10 @@
       for (var elem in slide.content) {
         slide.content[elem].selected = false;
         slide.content[elem].element.style.outline = "none";
+        slide.content[elem].element.removeEventListener("dblclick", null);
       }
     }
+    
     selectedElement = null;
   };
 
@@ -131,18 +133,8 @@
       slide = slidesArray[i];
       for (var el in slide.content) {
         //console.log(i, slide.content[el].element, elem);
-        if (slide.content[el].element === elem) {
+        if (slide.content[el].element === elem || slide.content[el].element.contains(elem)) {
 
-          UI.setResizeAnchorPosition(slide.content[el].element);
-          UI.setDeleteElementPosition(slide.content[el].element);
-
-          slide.content[el].selected = true;
-          //console.log(elem)
-          elem.style.outline = "1px solid #49c";
-          UI.setTextToolbarProps(elem);
-          selectedElement = slide.content[el];
-        }
-        if(slide.content[el].element.contains(elem)) {
           UI.setResizeAnchorPosition(slide.content[el].element);
           UI.setDeleteElementPosition(slide.content[el].element);
 
@@ -151,6 +143,7 @@
           slide.content[el].element.style.outline = "1px solid #49c";
           UI.setTextToolbarProps(slide.content[el].element);
           selectedElement = slide.content[el];
+
         }
       }
     }
@@ -422,6 +415,22 @@
     reader.readAsDataURL(file);
   };
 
+  UI.headerItems.getElementsByClassName("toolbar-video-input")[0].onchange = function(e) {
+    var file = this.files[0];
+
+    var slideIndex = UI.getCurrentSlideIndex();
+
+    var reader  = new FileReader();
+
+    reader.addEventListener("load", function () {
+      slidesArray[slideIndex].addElement(Toolbar.createNewVideo(reader.result.toString(), 0, 0));
+
+      UI.updateSlide(slidesArray, slideIndex);
+    }, false);
+
+    reader.readAsDataURL(file);
+  };
+
   UI.headerItems.getElementsByClassName("toolbar-list")[0].onclick = function(e) {
     var slideIndex = UI.getCurrentSlideIndex();
     slidesArray[slideIndex].addElement(Toolbar.createNewList("List Item", 0, 0));
@@ -448,6 +457,22 @@
 
     reader.addEventListener("load", function () {
       slidesArray[slideIndex].addElement(Toolbar.createNewImage(reader.result.toString(), 0, 0));
+
+      UI.updateSlide(slidesArray, slideIndex);
+    }, false);
+
+    reader.readAsDataURL(file);
+  };
+
+  UI.toolbar.getElementsByClassName("toolbar-video-input")[0].onchange = function(e) {
+    var file = this.files[0];
+
+    var slideIndex = UI.getCurrentSlideIndex();
+
+    var reader  = new FileReader();
+
+    reader.addEventListener("load", function () {
+      slidesArray[slideIndex].addElement(Toolbar.createNewVideo(reader.result.toString(), 0, 0));
 
       UI.updateSlide(slidesArray, slideIndex);
     }, false);
