@@ -15,9 +15,9 @@
   var maxZIndex = 2;
 
   Preload.getData(function(data) {
-    if(data) {
+    if (data) {
       var i = 0;
-      for(var slideContent in data) {
+      for (var slideContent in data) {
         var slide = new Slide(i);
         slide.content = data[slideContent];
         slidesArray.push(slide);
@@ -40,43 +40,50 @@
       UI.viewSlide(slidesArray, 0);
 
       clearSelectedElement();
-    }else {
-      var slide = new Slide(0);
-      slidesArray.push(slide);
-      UI.createSlide(slide);
-
-      slide.iconElement.onclick = (function(i) {
-        return function() {
-          UI.viewSlide(slidesArray, i);
-        };
-      })(0);
-
-      UI.viewSlide(slidesArray, 0);
     }
-    document.getElementsByClassName("loading-gif")[0].style.display = "none";
-    document.getElementsByClassName("header-right")[0].style.display = "block";
+    document.getElementsByClassName("loading-gif")[0].style.opacity = "0";
+    document.getElementsByClassName("loading-gif")[0].style.top = "30%";
+    document.getElementsByClassName("header")[0].style.display = "block";
+    document.getElementsByClassName("main-container")[0].style.display = "block";
+    document.getElementsByClassName("header")[0].style.opacity = "0";
+    document.getElementsByClassName("main-container")[0].style.opacity = "0";
+    setTimeout(function() {
+      document.getElementsByClassName("loading-gif")[0].style.display = "none";
+      document.getElementsByClassName("header")[0].style.transition = "2s";
+      document.getElementsByClassName("main-container")[0].style.transition = "2s";
+      document.getElementsByClassName("header")[0].style.opacity = "1";
+      document.getElementsByClassName("main-container")[0].style.opacity = "1";
+    }, 2000);
+  }, function(err) {
+    var slide = new Slide(0);
+    slidesArray.push(slide);
+    UI.createSlide(slide);
+
+    slide.iconElement.onclick = (function(i) {
+      return function() {
+        UI.viewSlide(slidesArray, i);
+      };
+    })(0);
+
+    UI.viewSlide(slidesArray, 0);
+
+    document.getElementsByClassName("loading-gif")[0].style.opacity = "0";
+    document.getElementsByClassName("loading-gif")[0].style.top = "30%";
+    setTimeout(function() {
+      document.getElementsByClassName("loading-gif")[0].style.display = "none";
+      document.getElementsByClassName("header")[0].style.display = "block";
+      document.getElementsByClassName("main-container")[0].style.display = "block";
+    }, 2000);
   });
 
-  /*var slide = new Slide(0);
-  slidesArray.push(slide);
-  UI.createSlide(slide);
-
-  slide.iconElement.onclick = (function(i) {
-    return function() {
-      UI.viewSlide(slidesArray, i);
-    };
-  })(0);
-
-  UI.viewSlide(slidesArray, 0);*/
+  // Window Resize
+  window.onresize = function() {
+    UI.updateSlide(slidesArray, UI.getCurrentSlideIndex());
+  }
 
   var saveSlidesContent = function() {
     var content = {};
     for (var i = 0; i < slidesArray.length; i++) {
-      for(var elem in slidesArray[i].content) {
-        var tag = slidesArray[i].content[elem];
-        if(tag.file) {
-        }
-      }
       content[i] = slidesArray[i].content;
     }
     Preload.putData(content);
@@ -89,19 +96,19 @@
   };
 
   document.onkeydown = function(e) {
-    if(e.shiftKey) {
+    if (e.shiftKey) {
       shiftKeyPressed = true;
-    }else {
+    } else {
       shiftKeyPressed = false;
     }
-    
+
     if (e.keyCode === 13 && !e.shiftKey) {
-      if(e.target.getAttribute("contenteditable") === "true") {
+      if (e.target.getAttribute("contenteditable") === "true") {
         e.preventDefault();
-        if(e.target.classList.contains("list-elements")){
+        if (e.target.classList.contains("list-elements")) {
           document.execCommand("insertHTML", false, "<br><br>");
           document.execCommand("insertHTML", false, "<li></li>");
-        }else {
+        } else {
           //document.execCommand("insertUnorderedList", false);
           document.execCommand("insertHTML", false, "<br><br>");
           //document.execCommand("insertUnorderedList");
@@ -125,7 +132,7 @@
         slide.content[elem].element.removeEventListener("dblclick", null);
       }
     }
-    
+
     selectedElement = null;
   };
 
@@ -172,7 +179,7 @@
      * 37 = Left Arrow, 39 = Right Arrow, 32 = Space, 13 = Enter, 27 = Escape
      */
 
-     if (presentationMode) {
+    if (presentationMode) {
       if (e.keyCode === 37) {
         index--;
         if (index < 0) {
@@ -230,13 +237,13 @@
       }
       if (e.which === 3) {
         console.log(UI.slideBody.childNodes, e.target);
-        var slideBodyNodesArray = [].map.call(UI.slideBody.children ,function(res) {
+        var slideBodyNodesArray = [].map.call(UI.slideBody.children, function(res) {
           return res;
         });
-        if(slideBodyNodesArray.indexOf(e.target) > -1){
+        if (slideBodyNodesArray.indexOf(e.target) > -1) {
           Toolbar.show(e);
         }
-      }else {
+      } else {
         Toolbar.hide();
       }
     }
@@ -344,8 +351,8 @@
 
   UI.textToolbars[8].getElementsByTagName("input")[0].onkeyup = function(e) {
     this.value = this.value.replace(/[^0-9]/g, '');
-    if (parseInt(this.value) > 70) {
-      this.value = 70;
+    if (parseInt(this.value) > 95) {
+      this.value = 95;
     }
     if (this.value === "") {
       this.value = 0;
@@ -366,7 +373,7 @@
     var imgData = Toolbar.canvasContext.getImageData(posX, posY, 1, 1);
     UI.textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color = "rgb(" + imgData.data[0] + "," + imgData.data[1] + "," + imgData.data[2] + ")";
 
-    if(selectedElement) {
+    if (selectedElement) {
       selectedElement.element.style.color = UI.textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color;
       TagOperation.setStyle(selectedElement, "color", UI.textToolbars[9].getElementsByClassName("fa-pencil")[0].style.color);
     }
@@ -379,7 +386,7 @@
     var imgData = Toolbar.bgCanvasContext.getImageData(posX, posY, 1, 1);
     UI.textToolbars[10].style.background = "rgb(" + imgData.data[0] + "," + imgData.data[1] + "," + imgData.data[2] + ")";
 
-    if(selectedElement) {
+    if (selectedElement) {
       selectedElement.element.style.background = UI.textToolbars[10].style.background;
       TagOperation.setStyle(selectedElement, "background", UI.textToolbars[10].style.background);
     }
@@ -388,7 +395,7 @@
 
   UI.textToolbars[10].getElementsByClassName("font-bg-clear-btn")[0].onmousedown = function() {
 
-    if(selectedElement) {
+    if (selectedElement) {
       selectedElement.element.style.background = "none";
       TagOperation.setStyle(selectedElement, "background", "none");
     }
@@ -425,9 +432,9 @@
 
     var slideIndex = UI.getCurrentSlideIndex();
 
-    var reader  = new FileReader();
+    var reader = new FileReader();
 
-    reader.addEventListener("load", function () {
+    reader.addEventListener("load", function() {
       slidesArray[slideIndex].addElement(Toolbar.createNewImage(reader.result.toString(), 0, 0));
 
       UI.updateSlide(slidesArray, slideIndex);
@@ -441,9 +448,9 @@
 
     var slideIndex = UI.getCurrentSlideIndex();
 
-    var reader  = new FileReader();
+    var reader = new FileReader();
 
-    reader.addEventListener("load", function () {
+    reader.addEventListener("load", function() {
       slidesArray[slideIndex].addElement(Toolbar.createNewVideo(reader.result.toString(), 0, 0));
 
       UI.updateSlide(slidesArray, slideIndex);
@@ -474,9 +481,9 @@
     var slideIndex = UI.getCurrentSlideIndex();
     var pos = UI.getRelativePosition(slidesArray, e);
 
-    var reader  = new FileReader();
+    var reader = new FileReader();
 
-    reader.addEventListener("load", function () {
+    reader.addEventListener("load", function() {
       slidesArray[slideIndex].addElement(Toolbar.createNewImage(reader.result.toString(), 0, 0));
 
       UI.updateSlide(slidesArray, slideIndex);
@@ -490,9 +497,9 @@
 
     var slideIndex = UI.getCurrentSlideIndex();
 
-    var reader  = new FileReader();
+    var reader = new FileReader();
 
-    reader.addEventListener("load", function () {
+    reader.addEventListener("load", function() {
       slidesArray[slideIndex].addElement(Toolbar.createNewVideo(reader.result.toString(), 0, 0));
 
       UI.updateSlide(slidesArray, slideIndex);
@@ -526,23 +533,20 @@
     anchorSelected = true;
 
     selectedElementAspectRatio = Utils.getStyle(selectedElement.element, "width") / Utils.getStyle(selectedElement.element, "height");
-    console.log(selectedElement.element);
+    //console.log(selectedElement.element);
   };
 
   document.onmousemove = function(e) {
 
-    if(selectedElement) {
-      //UI.updateSlide(slidesArray, UI.getCurrentSlideIndex());
-    }
-
     if (anchorSelected) {
       UI.resizeAnchor.style.top = (e.clientY - UI.slideBody.getBoundingClientRect().top - 4) + "px";
       UI.resizeAnchor.style.left = (e.clientX - UI.slideBody.getBoundingClientRect().left - 4) + "px";
-      selectedElement.element.style.width = (parseFloat(UI.resizeAnchor.style.left) + 4 - parseFloat(selectedElement.element.style.left) - Utils.getStyle(selectedElement.element.parentElement, "margin-left")) + "px";
-      
-      if(shiftKeyPressed) {
+      var marginLeft = selectedElement.element.parentElement.getBoundingClientRect().right -  Utils.getStyle(selectedElement.element.parentElement, "width");
+      selectedElement.element.style.width = (parseFloat(UI.resizeAnchor.style.left) + 4 - parseFloat(selectedElement.element.style.left) - marginLeft + 200) + "px";
+
+      if (shiftKeyPressed) {
         selectedElement.element.style.height = (parseFloat(selectedElement.element.style.width) / selectedElementAspectRatio) + "px";
-      }else {
+      } else {
         selectedElement.element.style.height = (parseFloat(UI.resizeAnchor.style.top) + 4 - parseFloat(selectedElement.element.style.top) - Utils.getStyle(selectedElement.element.parentElement, "top")) + "px";
       }
 
@@ -569,7 +573,7 @@
     if (selectedCount === 0) {
       UI.resizeAnchor.style.display = "none";
       UI.deleteElement.style.display = "none";
-      if(slidesArray.length > 0) {
+      if (slidesArray.length > 0) {
         UI.updateSlide(slidesArray, UI.getCurrentSlideIndex());
       }
     }

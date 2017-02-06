@@ -2,14 +2,14 @@ var Preload = (function() {
 
   var database = firebase.database();
 
-  var getData = function(func) {
+  var getData = function(func, err) {
     var ref = database.ref();
     ref.once("value", function(snapshot) {
       //console.log(snapshot.val());
       return func(snapshot.val().content);
     }, function(error) {
       //console.log("No data", error);
-      return func(false);
+      return err(false);
     })
   }
 

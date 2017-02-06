@@ -3,6 +3,10 @@
   font-family: 'Roboto', sans-serif;
 }
 
+body {
+  background: #e5e5e5;
+}
+
 /* Chrome scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
@@ -20,7 +24,10 @@ video::-webkit-media-controls-fullscreen-button {
 
 /* Header */
 .header {
+  display: none;
   text-align: center;
+  background: #fff;
+  border-bottom: 1px solid #ccc;
 }
 
 .header .header-logo {
@@ -208,16 +215,15 @@ video::-webkit-media-controls-fullscreen-button {
   box-shadow: 0 1px #47a;
 }
 
-.header-right {
+/* Main Container */
+.main-container {
   display: none;
 }
 
-/* Main Container */
 .main-container .slides-list {
-  border-right: 1px solid #fff;
-  background: #e5e5e5;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+  background: #dedede;
   overflow-y: auto;
+  border-right: 1px solid #ccc;
 }
 
 .slides-list .slide-list-icon {
@@ -227,7 +233,7 @@ video::-webkit-media-controls-fullscreen-button {
 }
 
 .slides-list .slide-list-icon:hover {
-  background: #ccc;
+  background: #d5d5d5;
 }
 
 .slide-list-icon .delete-slide-btn {
@@ -248,7 +254,7 @@ video::-webkit-media-controls-fullscreen-button {
 .slide-list-icon .thumbnail {
   width: 160px;
   height: 90px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
   background: #fff;
   border: 2px solid rgba(0,0,0,0);
   overflow: hidden;
@@ -286,16 +292,23 @@ video::-webkit-media-controls-fullscreen-button {
 }
 
 .slides-editor .slide-body {
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
   position: relative;
 }
 
 .slide-body .slide {
   display: none;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  box-shadow: 0 0 5px rgba(0,0,0,0.15);
   background: #fff;
   overflow: hidden;
   width: 80%;
+  height: 95%;
+  margin-top: 2.5%;
+  border: 1px solid #ccc;
+}
+
+.slide * {
+  transform-origin: top left;
 }
 
 .slide-body .slide p, .slide-body .slide div {
@@ -327,8 +340,7 @@ video::-webkit-media-controls-fullscreen-button {
 }
 
 .slides-editor .slide-notes {
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
-  border-top: 1px solid #fff;
+  border-top: 1px solid #ccc;
 }
 
 .slides-editor .slide-notes textarea {
@@ -340,7 +352,9 @@ video::-webkit-media-controls-fullscreen-button {
 .loading-gif {
   position: absolute;
   top:45%;
-  left: 50%;
+  left: 47.5%;
+  width: 5%;
+  transition: 2s;
 }
 
 /* Presentation */
@@ -369,10 +383,12 @@ video::-webkit-media-controls-fullscreen-button {
   box-sizing: border-box;
   padding: 10px;
   pointer-events: none;
+  transform-origin: top left;
 }
 
 .presentation-slide img, {
   padding: 5px;
+  transform-origin: top left;
 }
 
 .presentation-slide video {
@@ -395,6 +411,7 @@ video::-webkit-media-controls-fullscreen-button {
 /* Toolbar */
 
 .toolbar {
+  display: none;
   position: absolute;
   top: 400px;
   left: 400px;

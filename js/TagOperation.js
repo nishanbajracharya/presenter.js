@@ -19,8 +19,8 @@ var TagOperation = (function() {
     var movingElementFlag = false;
 
     tag.element.addEventListener("mousedown", function(e) {
-      posX = e.clientX - tag.element.getBoundingClientRect().left + document.documentElement.scrollLeft;
-      posY = e.clientY - tag.element.getBoundingClientRect().top + document.documentElement.scrollTop;
+      posX = e.clientX - tag.element.getBoundingClientRect().left + document.documentElement.scrollLeft + 1;
+      posY = e.clientY - tag.element.getBoundingClientRect().top + document.documentElement.scrollTop + 1;
       movingElementFlag = true;
     });
 
@@ -28,8 +28,8 @@ var TagOperation = (function() {
       document.body.style.cursor = "default";
       if(movingElementFlag){
         tag.position = {
-          x: tag.element.getBoundingClientRect().left - tag.element.parentElement.getBoundingClientRect().left,
-          y: tag.element.getBoundingClientRect().top  - tag.element.parentElement.getBoundingClientRect().top
+          x: (tag.element.getBoundingClientRect().left - tag.element.parentElement.getBoundingClientRect().left - 1) / Utils.getStyle(container, "width") * 100,
+          y: (tag.element.getBoundingClientRect().top  - tag.element.parentElement.getBoundingClientRect().top - 1) / Utils.getStyle(container, "height") * 100
         };
       }
       movingElementFlag = false;
