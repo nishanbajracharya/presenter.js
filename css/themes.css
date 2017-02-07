@@ -1,0 +1,35 @@
+.theme-blue .slide, .theme-blue .thumbnail, .theme-blue .presentation-slide {
+  background: url(../images/theme-blue-bg.jpg);
+  background-size: cover;
+  color: #fff;
+}
+
+.theme-green .slide, .theme-green .thumbnail, .theme-green .presentation-slide {
+  background: url(../images/theme-green-bg.jpg);
+  background-size: cover;
+  color: #fff;
+}
+
+.theme-red .slide, .theme-red .thumbnail, .theme-red .presentation-slide {
+  background: url(../images/theme-red-bg.jpg);
+  background-size: cover;
+  color: #fff;
+}
+
+.theme-material-dark .slide, .theme-material-dark .thumbnail, .theme-material-dark .presentation-slide {
+  background: url(../images/theme-material-dark-bg.jpg);
+  background-size: cover;
+  color: #fff;
+}
+
+.theme-white .slide, .theme-white .thumbnail, .theme-white .presentation-slide {
+  background: url(../images/theme-white-bg.jpg);
+  background-size: cover;
+  color: #333;
+}
+
+.theme-white-blue .slide, .theme-white-blue .thumbnail, .theme-white-blue .presentation-slide {
+  background: url(../images/theme-white-blue-bg.jpg);
+  background-size: cover;
+  color: #333;
+}
