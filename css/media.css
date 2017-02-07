@@ -1,11 +1,30 @@
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 768px) {
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+  }
   .header-left .header-logo{
     display: none;
   }
   .header-toolbar {
-    margin-left: 0;
+    display: none;
   }
-  .header-toolbar .toolbar-elements {
-    margin-right: 0;
+  .header-save-btn, .header-new-slide-btn {
+    display: none;
+  }
+  .header button {
+    width: 40%;
+    height: 40%;
+    font-size: 300%;
+    position: absolute;
+    top: 30%;
+    left: 30%;
+  }
+  .main-container {
+    display: none!important;
   }
 }
