@@ -29,6 +29,11 @@ var UI = (function() {
   var width = Utils.getStyle(this.slideBody, "width");
   var height = Utils.getStyle(this.slideBody, "height");
 
+  /*window.onresize = function() {
+    width = Utils.getStyle(this.slideBody, "width");
+    height = Utils.getStyle(this.slideBody, "height");
+  }*/
+
   this.slides = [];
 
   var fontList = textToolbars[7].getElementsByClassName("font-list-name");
@@ -72,16 +77,12 @@ var UI = (function() {
         e.style[style] = slide.content[elem].styles[style];
       }
 
-      e.style.top = slide.content[elem].position.y + "px";
-      e.style.left = slide.content[elem].position.x + "px";
+      e.style.top = slide.content[elem].position.y + "%";
+      e.style.left = slide.content[elem].position.x + "%";
 
       slideElement.appendChild(e);
     }
 
-    slideElement.style.width = (width * 0.8) + "px";
-    slideElement.style.height = (width * 0.8 * 9 / 16) + "px";
-    //slideElement.style.top = ((height - width * .8 * 9 / 16) / 2) + "px";
-    slideElement.style.top = "2.5%";
     that.slideBody.appendChild(slideElement);
 
     var slideListIcon = slide.iconElement = document.createElement("div");
@@ -98,6 +99,8 @@ var UI = (function() {
   var updateSlide = function(slidesArray, index) {
     var slide = slidesArray[index];
     var slideElement = slide.element;
+    var editorScale = Utils.getStyle(slideElement, "width") / 932.8; // Standard width of slide
+
     slideElement.innerHTML = "";
     for (var elem in slide.content) {
       var e = document.createElement(slide.content[elem].tag);
@@ -121,9 +124,10 @@ var UI = (function() {
         e.appendChild(slide.content[elem].videoSourceElement);
         e.setAttribute("controls", "");
       }
+      
+      e.style.top = slide.content[elem].position.y + "%";
+      e.style.left = slide.content[elem].position.x + "%";
 
-      e.style.top = slide.content[elem].position.y + "px";
-      e.style.left = slide.content[elem].position.x + "px";
       slideElement.appendChild(e);
       slide.thumbnail.innerHTML = "<div class='delete-slide-btn'><i class='fa fa-times-circle'></i></div><div class='thumbnail'><div class='thumbnail-content'>" + slide.element.innerHTML + "</div></div>";
 
@@ -162,8 +166,8 @@ var UI = (function() {
     var posY = e.clientY - slideArray[currentSlideIndex].element.getBoundingClientRect().top - document.documentElement.scrollTop;
     //console.log(posX);
     return {
-      posX: posX,
-      posY: posY
+      posX: posX / Utils.getStyle(this.slideBody, "width") * 100,
+      posY: posY / Utils.getStyle(this.slideBody, "height") * 100
     };
   };
 
@@ -212,20 +216,16 @@ var UI = (function() {
   };
 
   var setResizeAnchorPosition = function(elem) {
-    //resizeAnchor.style.left = (Utils.getStyle(elem, "left") + Utils.getStyle(elem, "width") + elem.parentElement.getBoundingClientRect().left - 4) + "px";
-    //resizeAnchor.style.top = (Utils.getStyle(elem, "top") + Utils.getStyle(elem, "height") + elem.parentElement.getBoundingClientRect().top + 10) + "px";
 
-    resizeAnchor.style.left = (elem.offsetLeft + Utils.getStyle(elem, "width") + slideBody.offsetLeft / 2 + 12) + "px";
-    resizeAnchor.style.top = (elem.offsetTop + Utils.getStyle(elem, "height") + 10) + "px";
+    resizeAnchor.style.left = (elem.offsetLeft + Utils.getStyle(elem, "width") + slideBody.offsetLeft / 2 + 14) + "px";
+    resizeAnchor.style.top = (elem.offsetTop + Utils.getStyle(elem, "height") - 3) + "px";
     resizeAnchor.style.display = "block";
   };
 
   var setDeleteElementPosition = function(elem) {
-    //deleteElement.style.left = (Utils.getStyle(elem, "left") + Utils.getStyle(elem, "width") + Utils.getStyle(elem.parentElement, "margin-left") - 8) + "px";
-    //deleteElement.style.top = (Utils.getStyle(elem, "top") + Utils.getStyle(elem.parentElement, "margin-top") + 4) + "px";
-
+   
     deleteElement.style.left = (elem.offsetLeft + Utils.getStyle(elem, "width") + slideBody.offsetLeft / 2 + 8) + "px";
-    deleteElement.style.top = (elem.offsetTop + 4) + "px";
+    deleteElement.style.top = (elem.offsetTop - 6) + "px";
     deleteElement.style.display = "block";
   };
 
@@ -238,7 +238,8 @@ var UI = (function() {
   // Presentation Mode
   var startPresentation = function(slidesArray) {
 
-    var fullscreenScale = window.screen.width / Utils.getStyle(document.getElementsByClassName("slide")[0], "width");
+    var fullscreenScaleX = window.screen.width / 932.8;
+    var fullscreenScaleY = window.screen.height / 525;
 
     presentationElement = document.getElementsByClassName("presentation")[0];
     if (!presentationElement) {
@@ -260,10 +261,10 @@ var UI = (function() {
       presentationSlide.setAttribute("class", "presentation-slide");
       presentationSlide.innerHTML = slidesArray[i].element.innerHTML;
 
-      presentationSlide.style.width = (Utils.getStyle(presentationElement, "width") / fullscreenScale) + "px";
-      presentationSlide.style.height = Utils.getStyle(presentationElement, "height") + "px";
+      presentationSlide.style.width = "932.8px";
+      presentationSlide.style.height = "525px";
       presentationSlide.style.left = (i * Utils.getStyle(presentationElement, "width")) + "px";
-      presentationSlide.style.transform = "scale(" + fullscreenScale + ")";
+      presentationSlide.style.transform = "scale(" + fullscreenScaleX + "," + fullscreenScaleY + ")";
 
       presentationContainer.appendChild(presentationSlide);
     }

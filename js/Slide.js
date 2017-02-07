@@ -30,8 +30,8 @@ var Slide = function(index) {
   };
 
   this.init = (function() {
-    var tag = new Tag("div", "Slide", {x: 5, y: 5});
-    TagOperation.setStyle(tag, "width", "calc(100% - 10px)");
+    var tag = new Tag("div", "Slide", {x: 0, y: 0});
+    TagOperation.setStyle(tag, "width", "100%");
     TagOperation.setStyle(tag, "text-align", "left");
     TagOperation.setAttribute(tag, "contenteditable", true);
     that.content[tag.index] = tag;
