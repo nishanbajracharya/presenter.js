@@ -194,6 +194,74 @@ video::-webkit-media-controls-fullscreen-button {
   border: 1px solid #ccc;
 }
 
+.header-toolbar ul li.slide-theme-picker .themes-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  padding-right: 0;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  background: #fff;
+  width: 442px;
+  z-index: 200;
+  display: none;
+}
+
+.header-toolbar ul li.slide-theme-picker:hover .themes-list {
+  display: block;
+}
+
+.themes-list .theme-icon {
+  float: left;
+  width: 200px;
+  box-sizing: border-box;
+  height: 113px;
+  border: 2px solid #ccc;
+  background: #fff;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  line-height: 113px;
+  text-align: center;
+  font-size: 40px;
+}
+
+.theme-icon.t-red {
+  background: url(../images/theme-red-bg.jpg);
+  background-size: cover;
+  color: #fff;
+}
+
+.theme-icon.t-blue {
+  background: url(../images/theme-blue-bg.jpg);
+  background-size: cover;
+  color: #fff;
+}
+
+.theme-icon.t-green {
+  background: url(../images/theme-green-bg.jpg);
+  background-size: cover;
+  color: #fff;
+}
+
+.theme-icon.t-material {
+  background: url(../images/theme-material-dark-bg.jpg);
+  background-size: cover;
+  color: #fff;
+}
+
+.theme-icon.t-white {
+  background: url(../images/theme-white-bg.jpg);
+  background-size: cover;
+  color: #333;
+}
+
+.theme-icon.t-white-blue {
+  background: url(../images/theme-white-blue-bg.jpg);
+  background-size: cover;
+  color: #333;
+}
+
 .header button {
   height: 30px;
   border: none;

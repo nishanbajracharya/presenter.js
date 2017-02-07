@@ -402,6 +402,12 @@
     UI.textToolbars[10].style.background = "none";
   };
 
+  UI.textToolbars[11].onclick = function(e) {
+    if(e.target.classList.contains("theme-icon")) {
+      document.body.setAttribute("class", e.target.dataset.themeName);
+    }
+  }
+
   var fullscreenHandler = function() {
     console.log(presentationMode);
     index = 0;
