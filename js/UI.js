@@ -3,6 +3,9 @@ var UI = (function() {
 
   var that = this;
 
+  var STANDARD_WIDTH = 932.8;
+  var STANDARD_HEIGHT = 525;
+
   var presentationElement = null;
   var presentationContainer = null;
 
@@ -99,7 +102,7 @@ var UI = (function() {
   var updateSlide = function(slidesArray, index) {
     var slide = slidesArray[index];
     var slideElement = slide.element;
-    var editorScale = Utils.getStyle(slideElement, "width") / 932.8; // Standard width of slide
+    var editorScale = Utils.getStyle(slideElement, "width") / STANDARD_WIDTH; // Standard width of slide
 
     slideElement.innerHTML = "";
     for (var elem in slide.content) {
@@ -238,8 +241,8 @@ var UI = (function() {
   // Presentation Mode
   var startPresentation = function(slidesArray) {
 
-    var fullscreenScaleX = window.screen.width / 932.8;
-    var fullscreenScaleY = window.screen.height / 525;
+    var fullscreenScaleX = window.screen.width / STANDARD_WIDTH;
+    var fullscreenScaleY = window.screen.height / STANDARD_HEIGHT;
 
     presentationElement = document.getElementsByClassName("presentation")[0];
     if (!presentationElement) {
@@ -261,8 +264,8 @@ var UI = (function() {
       presentationSlide.setAttribute("class", "presentation-slide");
       presentationSlide.innerHTML = slidesArray[i].element.innerHTML;
 
-      presentationSlide.style.width = "932.8px";
-      presentationSlide.style.height = "525px";
+      presentationSlide.style.width = STANDARD_WIDTH + "px";
+      presentationSlide.style.height = STANDARD_HEIGHT + "px";
       presentationSlide.style.left = (i * Utils.getStyle(presentationElement, "width")) + "px";
       presentationSlide.style.transform = "scale(" + fullscreenScaleX + "," + fullscreenScaleY + ")";
 

@@ -14,7 +14,7 @@
 
   var maxZIndex = 2;
 
-  Preload.getData(function(data) {
+  Preload.getData(function(data, theme) {
     if (data) {
       var i = 0;
       for (var slideContent in data) {
@@ -38,6 +38,8 @@
       }
       i = 0;
       UI.viewSlide(slidesArray, 0);
+
+      document.body.setAttribute("class", theme);
 
       clearSelectedElement();
     }
@@ -86,7 +88,7 @@
     for (var i = 0; i < slidesArray.length; i++) {
       content[i] = slidesArray[i].content;
     }
-    Preload.putData(content);
+    Preload.putData(content, document.body.classList[0]);
   };
 
   UI.saveBtn.onclick = function() {

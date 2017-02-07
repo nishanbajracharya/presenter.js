@@ -6,17 +6,21 @@ var Preload = (function() {
     var ref = database.ref();
     ref.once("value", function(snapshot) {
       //console.log(snapshot.val());
-      return func(snapshot.val().content);
+      return func(snapshot.val().store.content, snapshot.val().store.theme);
     }, function(error) {
       //console.log("No data", error);
       return err(false);
     })
   }
 
-  var putData = function(data) {
-    console.log(data);
-    var ref = database.ref("content");
-    ref.set(data);
+  var putData = function(data, theme) {
+    var dataset = {
+      content: data,
+      theme: theme
+    }
+    console.log(dataset);
+    var ref = database.ref("store");
+    ref.set(dataset);
   }
 
   return {
