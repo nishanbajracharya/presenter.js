@@ -8,8 +8,8 @@ var Preload = (function() {
       //console.log(snapshot.val());
       return func(snapshot.val().store.content, snapshot.val().store.theme);
     }, function(error) {
-      //console.log("No data", error);
-      return err(false);
+      console.log("No data", error);
+      return err(error);
     })
   }
 
