@@ -5,7 +5,7 @@ var Preload = (function() {
   var getData = function(func, err) {
     var ref = database.ref();
     ref.once("value", function(snapshot) {
-      //console.log(snapshot.val());
+      console.log(snapshot);
       return func(snapshot.val().store.content, snapshot.val().store.theme);
     }, function(error) {
       console.log("No data", error);
