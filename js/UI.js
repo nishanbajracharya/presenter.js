@@ -220,7 +220,7 @@ var UI = (function() {
 
   var setResizeAnchorPosition = function(elem) {
     var boundingRect = elem.getBoundingClientRect();
-    var parentBoundingRect = elem.offsetTop.getBoundingClientRect();
+    var parentBoundingRect = elem.offsetParent.getBoundingClientRect();
     resizeAnchor.style.left = (boundingRect.left + Utils.getStyle(elem, "width") - Utils.getStyle(that.slidesList, 'width') - 4) + "px";
     resizeAnchor.style.top = (boundingRect.top + Utils.getStyle(elem, "height") - parentBoundingRect.top + 4) + "px";
     resizeAnchor.style.display = "block";
@@ -228,7 +228,7 @@ var UI = (function() {
 
   var setDeleteElementPosition = function(elem) {
     var boundingRect = elem.getBoundingClientRect();
-    var parentBoundingRect = elem.offsetTop.getBoundingClientRect();
+    var parentBoundingRect = elem.offsetParent.getBoundingClientRect();
     deleteElement.style.left = (boundingRect.left + Utils.getStyle(elem, "width") - Utils.getStyle(that.slidesList, 'width') - 8) + "px";
     deleteElement.style.top = (boundingRect.top - parentBoundingRect.top - 8) + "px";
     deleteElement.style.display = "block";
