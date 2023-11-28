@@ -1,5 +1,5 @@
 (function() {
-  console.log("presenter.js", "version 0.1.1");
+  console.log("presenter.js", "version 0.1.2");
 
   var presentationMode = false;
 

@@ -220,15 +220,15 @@ var UI = (function() {
 
   var setResizeAnchorPosition = function(elem) {
 
-    resizeAnchor.style.left = (elem.offsetLeft + Utils.getStyle(elem, "width") + slideBody.offsetLeft / 2 + 14) + "px";
-    resizeAnchor.style.top = (elem.offsetTop + Utils.getStyle(elem, "height") - 3) + "px";
+    resizeAnchor.style.left = (elem.getBoundingClientRect().left + Utils.getStyle(elem, "width") - 3) + "px";
+    resizeAnchor.style.top = (elem.getBoundingClientRect().top + Utils.getStyle(elem, "height") - 3) + "px";
     resizeAnchor.style.display = "block";
   };
 
   var setDeleteElementPosition = function(elem) {
    
-    deleteElement.style.left = (elem.offsetLeft + Utils.getStyle(elem, "width") + slideBody.offsetLeft / 2 + 8) + "px";
-    deleteElement.style.top = (elem.offsetTop - 6) + "px";
+    deleteElement.style.left = (elem.getBoundingClientRect().left + Utils.getStyle(elem, "width")) + "px";
+    deleteElement.style.top = elem.getBoundingClientRect().top + "px";
     deleteElement.style.display = "block";
   };
 
