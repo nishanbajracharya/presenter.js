@@ -222,7 +222,7 @@ var UI = (function() {
     var boundingRect = elem.getBoundingClientRect();
     var parentBoundingRect = elem.offsetParent.getBoundingClientRect();
     resizeAnchor.style.left = (boundingRect.left + Utils.getStyle(elem, "width") - Utils.getStyle(that.slidesList, 'width') - 4) + "px";
-    resizeAnchor.style.top = (boundingRect.top + Utils.getStyle(elem, "height") - parentBoundingRect.top + 4) + "px";
+    resizeAnchor.style.top = (boundingRect.top + Utils.getStyle(elem, "height") - parentBoundingRect.top - 4) + "px";
     resizeAnchor.style.display = "block";
   };
 
