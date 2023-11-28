@@ -1,5 +1,5 @@
 (function() {
-  console.log("presenter.js", "version 0.1");
+  console.log("presenter.js", "version 0.1.1");
 
   var presentationMode = false;
 
@@ -14,49 +14,49 @@
 
   var maxZIndex = 2;
 
-  Preload.getData(function(data, theme) {
-    if (data) {
-      var i = 0;
-      for (var slideContent in data) {
-        var slide = new Slide(i);
-        slide.content = data[slideContent];
-        slidesArray.push(slide);
-        UI.createSlide(slide);
+  // Preload.getData(function(data, theme) {
+  //   if (data) {
+  //     var i = 0;
+  //     for (var slideContent in data) {
+  //       var slide = new Slide(i);
+  //       slide.content = data[slideContent];
+  //       slidesArray.push(slide);
+  //       UI.createSlide(slide);
 
-        slide.iconElement.onclick = (function(i) {
-          return function() {
-            UI.viewSlide(slidesArray, i);
-          };
-        })(i);
+  //       slide.iconElement.onclick = (function(i) {
+  //         return function() {
+  //           UI.viewSlide(slidesArray, i);
+  //         };
+  //       })(i);
 
-        slide.deleteBtn.onclick = (function(i) {
-          return function() {
-            UI.deleteSlide(slidesArray, i);
-          }
-        })(i);
-        i++;
-      }
-      i = 0;
-      UI.viewSlide(slidesArray, 0);
+  //       slide.deleteBtn.onclick = (function(i) {
+  //         return function() {
+  //           UI.deleteSlide(slidesArray, i);
+  //         }
+  //       })(i);
+  //       i++;
+  //     }
+  //     i = 0;
+  //     UI.viewSlide(slidesArray, 0);
 
-      document.body.setAttribute("class", theme);
+  //     document.body.setAttribute("class", theme);
 
-      clearSelectedElement();
-    }
-    document.getElementsByClassName("loading-gif")[0].style.opacity = "0";
-    document.getElementsByClassName("loading-gif")[0].style.top = "30%";
-    document.getElementsByClassName("header")[0].style.display = "block";
-    document.getElementsByClassName("main-container")[0].style.display = "block";
-    document.getElementsByClassName("header")[0].style.opacity = "0";
-    document.getElementsByClassName("main-container")[0].style.opacity = "0";
-    setTimeout(function() {
-      document.getElementsByClassName("loading-gif")[0].style.display = "none";
-      document.getElementsByClassName("header")[0].style.transition = "2s";
-      document.getElementsByClassName("main-container")[0].style.transition = "2s";
-      document.getElementsByClassName("header")[0].style.opacity = "1";
-      document.getElementsByClassName("main-container")[0].style.opacity = "1";
-    }, 2000);
-  }, function(err) {
+  //     clearSelectedElement();
+  //   }
+  //   document.getElementsByClassName("loading-gif")[0].style.opacity = "0";
+  //   document.getElementsByClassName("loading-gif")[0].style.top = "30%";
+  //   document.getElementsByClassName("header")[0].style.display = "block";
+  //   document.getElementsByClassName("main-container")[0].style.display = "block";
+  //   document.getElementsByClassName("header")[0].style.opacity = "0";
+  //   document.getElementsByClassName("main-container")[0].style.opacity = "0";
+  //   setTimeout(function() {
+  //     document.getElementsByClassName("loading-gif")[0].style.display = "none";
+  //     document.getElementsByClassName("header")[0].style.transition = "2s";
+  //     document.getElementsByClassName("main-container")[0].style.transition = "2s";
+  //     document.getElementsByClassName("header")[0].style.opacity = "1";
+  //     document.getElementsByClassName("main-container")[0].style.opacity = "1";
+  //   }, 2000);
+  // }, function(err) {
     var slide = new Slide(0);
     slidesArray.push(slide);
     UI.createSlide(slide);
@@ -76,7 +76,7 @@
       document.getElementsByClassName("header")[0].style.display = "block";
       document.getElementsByClassName("main-container")[0].style.display = "block";
     }, 2000);
-  });
+  // });
 
   // Window Resize
   window.onresize = function() {
